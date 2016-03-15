@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfApplication1.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="814">
+    <Grid>
+        <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="39" Width="300" />
+        <Grid Height="400" Width="400" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image x:Name="gazou" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Image}"/>
+            <Label x:Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" BorderThickness="1" BorderBrush="Black"/>
+        </Grid>
+        <Grid Height="400" Width="400" Margin="400,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image x:Name="edge" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Edge}"/>
+            <Label x:Name="label2" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="400" Height="400" BorderThickness="1" BorderBrush="Black"/>
+        </Grid>
+        <Grid Margin="0,430,0,0">
+            <Button x:Name="button" Content="Load Image" Click="OnClick_load" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="75"/>
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="90,5,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" >
+                <ComboBoxItem Content="Canny"/>
+                <ComboBoxItem Content="FAST"/>
+                <ComboBoxItem Content="CDFAST"/>
+            </ComboBox>
+            <Button x:Name="button1" Click="Submited" Content="Submit" HorizontalAlignment="Left" Margin="721,5,0,0" VerticalAlignment="Top" Width="75"/>
+
+        </Grid>
+    </Grid>
+</Window>
