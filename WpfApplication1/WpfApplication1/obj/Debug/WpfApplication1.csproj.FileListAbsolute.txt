@@ -82,3 +82,6 @@ C:\Users\03dai\Documents\Visual Studio 2015\Projects\WpfApplication1\WpfApplicat
 C:\Users\03dai\Documents\Visual Studio 2015\test\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
 C:\Users\03dai\Documents\Visual Studio 2015\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
 C:\Users\03dai\Documents\Visual Studio 2015\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
+C:\Users\daichi\Documents\Visual Studio 2015\git\test\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
+C:\Users\daichi\Documents\Visual Studio 2015\git\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
+C:\Users\daichi\Documents\Visual Studio 2015\git\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
