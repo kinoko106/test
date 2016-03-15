@@ -34,16 +34,16 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
-            //CvMat matimg;
-            //gazou = new IplImage("C:\\Users\\03dai\\Documents\\Visual Studio 2015\\Projects\\WpfApplication1\\WpfApplication1\\Images\\shokaku.jpg", LoadMode.Color);
-            //int height, width;
-            //height = gazou.Height;
-            //width = gazou.Width;
-            
+			//CvMat matimg;
+			//gazou = new IplImage("C:\\Users\\03dai\\Documents\\Visual Studio 2015\\Projects\\WpfApplication1\\WpfApplication1\\Images\\shokaku.jpg", LoadMode.Color);
+			//int height, width;
+			//height = 400;
+			//width = 400;
 
-            //var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(gazou);
-            //DataContext = new { Height = 0,Width = 0 };
-        }
+
+			//var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(gazou);
+			//DataContext = new { Height = height, Width = width };
+		}
 
         private void OnClick_load(object sender, RoutedEventArgs e)
         {
@@ -60,23 +60,24 @@ namespace WpfApplication1
             {
 				//loadimage
                 loadImage = new IplImage(ofd.FileName);
-                double margin = 1.0;
-                if(loadImage.Height > 400 || loadImage.Width > 400)
-                {
-                    if(loadImage.Height > loadImage.Width)
-                    {
-                        margin = 400.0 / loadImage.Height;
-                    }
-                    else
-                    {
-						margin = 400.0 / loadImage.Width;
-                    }
-                }
-                CvSize size = new CvSize((int)(loadImage.Width * margin), (int)(loadImage.Height * margin));
-                IplImage dst = new IplImage(size, loadImage.Depth, loadImage.NChannels);
-                Cv.Resize(loadImage, dst);
-                var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(dst);
-                double height =bitmapImage.Height, width = bitmapImage.Width;
+				//          double margin = 1.0;
+				//          if(loadImage.Height > 400 || loadImage.Width > 400)
+				//          {
+				//              if(loadImage.Height > loadImage.Width)
+				//              {
+				//                  margin = 400.0 / loadImage.Height;
+				//              }
+				//              else
+				//              {
+				//margin = 400.0 / loadImage.Width;
+				//              }
+				//          }
+				//          CvSize size = new CvSize((int)(loadImage.Width * margin), (int)(loadImage.Height * margin));
+				//          IplImage dst = new IplImage(size, loadImage.Depth, loadImage.NChannels);
+				//          Cv.Resize(loadImage, dst);
+				//          var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(dst);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(loadImage);
+				double height =bitmapImage.Height, width = bitmapImage.Width;
 
 				//name
                 string name = ofd.FileName;
@@ -90,6 +91,7 @@ namespace WpfApplication1
 
 		private void Submited(object sender, RoutedEventArgs e)
 		{
+			if (loadImage == null)return;
 			if (comboBox.SelectedIndex == 0)
 			{
 				//edge
@@ -97,8 +99,9 @@ namespace WpfApplication1
 				Cv.CvtColor(loadImage, gray, ColorConversion.BgrToGray);
 				Cv.Canny(gray, canny, 100, 200);
 				var bitmapEdge = WriteableBitmapConverter.ToWriteableBitmap(canny);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(loadImage);
 
-				DataContext = new { Edge = bitmapEdge };
+				DataContext = new { Image = bitmapImage,Edge = bitmapEdge ,Height = bitmapImage.Height,Width = bitmapImage.Width};
 			}
 			else if (comboBox.SelectedIndex == 1)
 			{
@@ -108,6 +111,10 @@ namespace WpfApplication1
 			{
 
 			}
+		}
+		private void comboBox_changed(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
