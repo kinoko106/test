@@ -16,9 +16,6 @@ using Microsoft.Win32;
 using OpenCvSharp;
 using OpenCvSharp.CPlusPlus;
 using OpenCvSharp.Extensions;
-using OpenCvSharp.Blob;
-using OpenCvSharp.UserInterface;
-using OpenCvSharp.Utilities;
 
 namespace WpfApplication1
 {
@@ -27,31 +24,19 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-
-		IplImage loadImage;
-		string fileName;
+		ImageData imageData;
 
         public MainWindow()
         {
             InitializeComponent();
-			//CvMat matimg;
-			//gazou = new IplImage("C:\\Users\\03dai\\Documents\\Visual Studio 2015\\Projects\\WpfApplication1\\WpfApplication1\\Images\\shokaku.jpg", LoadMode.Color);
-			//int height, width;
-			//height = 400;
-			//width = 400;
 
-
-			//var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(gazou);
-			//DataContext = new { Height = height, Width = width };
 		}
 
         private void OnClick_load(object sender, RoutedEventArgs e)
         {
-
-            IplImage tmpImg;
             var ofd = new OpenFileDialog
             {
-                Multiselect = true,
+                Multiselect = false,
                 InitialDirectory = "C:\\Users\\03dai\\Documents\\Visual Studio 2015\\Projects\\WpfApplication1\\WpfApplication1\\Images",
                 Filter = "Image Files(*.jpg,*.jepg,*.png,*.bmp,*.tiff)|*.jpg;*.jepg;*.png;*.bmp;*.tiff|All files(*.*)|*.*"
                 //Filter = "Image Files(*.jpg,*.png)|*.jpg;*.png|All files(*.*)|*.*"
@@ -59,49 +44,27 @@ namespace WpfApplication1
             if (ofd.ShowDialog(Application.Current.MainWindow) == true)
             {
 				//loadimage
-                loadImage = new IplImage(ofd.FileName);
-				//          double margin = 1.0;
-				//          if(loadImage.Height > 400 || loadImage.Width > 400)
-				//          {
-				//              if(loadImage.Height > loadImage.Width)
-				//              {
-				//                  margin = 400.0 / loadImage.Height;
-				//              }
-				//              else
-				//              {
-				//margin = 400.0 / loadImage.Width;
-				//              }
-				//          }
-				//          CvSize size = new CvSize((int)(loadImage.Width * margin), (int)(loadImage.Height * margin));
-				//          IplImage dst = new IplImage(size, loadImage.Depth, loadImage.NChannels);
-				//          Cv.Resize(loadImage, dst);
-				//          var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(dst);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(loadImage);
-				double height =bitmapImage.Height, width = bitmapImage.Width;
+				imageData = new ImageData(ofd.FileName);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.MatImage);
 
-				//name
-                string name = ofd.FileName;
-                int lastIndex = name.LastIndexOf("\\");
-                name = name.Substring(lastIndex+1);
-
-				DataContext = new { Image = bitmapImage, Height = height, Width = width, FileName = name };
+				DataContext = new { Image = bitmapImage, Height = bitmapImage.Height, Width = bitmapImage.Width, FileName = imageData.FileName };
             }
 
         }
 
 		private void Submited(object sender, RoutedEventArgs e)
 		{
-			if (loadImage == null)return;
+			if (imageData.MatImage == null)return;
 			if (comboBox.SelectedIndex == 0)
 			{
 				//edge
-				IplImage gray = Cv.CreateImage(new CvSize(loadImage.Width, loadImage.Height), BitDepth.U8, 1), canny = Cv.CreateImage(new CvSize(loadImage.Width, loadImage.Height), BitDepth.U8, 1);
-				Cv.CvtColor(loadImage, gray, ColorConversion.BgrToGray);
-				Cv.Canny(gray, canny, 100, 200);
+				Mat gray = new Mat(Cv.Size(imageData.Width, imageData.Height),MatType.CV_8SC1),canny = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1);
+				Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
+				Cv2.Canny(gray, canny, 100, 200);
 				var bitmapEdge = WriteableBitmapConverter.ToWriteableBitmap(canny);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(loadImage);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.MatImage);
 
-				DataContext = new { Image = bitmapImage,Edge = bitmapEdge ,Height = bitmapImage.Height,Width = bitmapImage.Width};
+				DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapEdge, Height = bitmapImage.Height, Width = bitmapImage.Width };
 			}
 			else if (comboBox.SelectedIndex == 1)
 			{
@@ -114,7 +77,10 @@ namespace WpfApplication1
 		}
 		private void comboBox_changed(object sender, RoutedEventArgs e)
 		{
+			if (comboBox.SelectedIndex == 0)
+			{
 
+			}
 		}
 	}
 }

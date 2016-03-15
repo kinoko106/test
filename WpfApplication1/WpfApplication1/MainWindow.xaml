@@ -10,20 +10,18 @@
     <Grid>
         <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="39" Width="300" Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal" Margin="0,30,0,30">
-            <Image x:Name="gazou" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Image}"/>
-            <Image x:Name="edge" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Edge}"/>            
+            <Image x:Name="image" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Image}"/>
+            <Image x:Name="edge" HorizontalAlignment="Center" Height="{Binding Height}" Margin="0,0,0,0" VerticalAlignment="Center" Width="{Binding Width}" Source="{Binding Edge}"/>
         </StackPanel>
 
-
         <Grid Grid.ColumnSpan="2" VerticalAlignment="Bottom">
-            <Button x:Name="button" Content="Load Image" Click="OnClick_load" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="Load" Content="Load Image" Click="OnClick_load" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="75"/>
             <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="90,5,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="comboBox_changed">
                 <ComboBoxItem Content="Canny"/>
                 <ComboBoxItem Content="FAST"/>
                 <ComboBoxItem Content="CDFAST"/>
             </ComboBox>
             <Button x:Name="button1" Click="Submited" Content="Submit" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
-
         </Grid>
     </Grid>
 </Window>
