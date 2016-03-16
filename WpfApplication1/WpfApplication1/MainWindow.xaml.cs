@@ -27,9 +27,8 @@ namespace WpfApplication1
 		ImageData imageData;
 
         public MainWindow()
-        {
+        {	
             InitializeComponent();
-
 		}
 
         private void OnClick_load(object sender, RoutedEventArgs e)
@@ -79,7 +78,7 @@ namespace WpfApplication1
 		{
 			if (comboBox.SelectedIndex == 0)
 			{
-
+				
 			}
 		}
 	}
