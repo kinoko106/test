@@ -6,24 +6,29 @@
         xmlns:local="clr-namespace:WpfApplication1"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfApplication1.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="MainWindow" MinHeight="425" Width="900" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="{x:Null}">
     <Grid>
         <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="39" Width="300" />
-        <StackPanel Orientation="Horizontal">
-            <StackPanel MinWidth="100">
-                <Button x:Name="Load" Content="Load Image" Click="OnClick_load" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="75"/>
-                <ComboBox x:Name="comboBox" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" SelectedIndex="0" SelectionChanged="comboBox_changed">
-                    <ComboBoxItem Content="Canny"/>
-                    <ComboBoxItem Content="FAST"/>
-                    <ComboBoxItem Content="CDFAST"/>
-                </ComboBox>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Background="White">
+                <StackPanel MinWidth="100" MinHeight="400" Background="#FF293955" >
+                    <Button x:Name="Load" Content="Load Image" Click="OnClick_load" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="75"/>
+                    <ComboBox x:Name="comboBox" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" SelectedIndex="0" SelectionChanged="comboBox_changed">
+                        <ComboBoxItem Content="Canny"/>
+                        <ComboBoxItem Content="FAST"/>
+                        <ComboBoxItem Content="CDFAST"/>
+                    </ComboBox>
+                    <StackPanel x:Name="CannyPanel">
+                        <Label HorizontalAlignment="Left" Margin="10,5,0,0" Content="Threshold1" Height="23"/>
+                        <TextBox Width="80" Text="0" TextAlignment="Right" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+                <Image x:Name="image" MinHeight="400" MinWidth="400" Height="{Binding Height}" Width="{Binding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Image}"/>
+                <Image x:Name="edge" MinHeight="400" MinWidth="400" Height="{Binding Height}" Width="{Binding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Edge}"/>
+            </StackPanel>
+            <StackPanel Height="25" Background="#FF293955">
                 <Button x:Name="button1" Click="Submited" Content="Submit" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Bottom" Width="75"/>
             </StackPanel>
-            <Image x:Name="image" MinHeight="400" MinWidth="400" Height="{Binding Height}" Width="{Binding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Image}"/>
-            <Image x:Name="edge" MinHeight="400" MinWidth="400" Height="{Binding Height}" Width="{Binding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Edge}"/>
         </StackPanel>
-       
-       
-        
     </Grid>
 </Window>
