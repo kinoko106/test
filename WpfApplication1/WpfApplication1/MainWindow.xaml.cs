@@ -25,11 +25,11 @@ namespace WpfApplication1
     public partial class MainWindow : System.Windows.Window
     {
 		ImageData imageData;
+		
 
         public MainWindow()
-        {
+        {	
             InitializeComponent();
-
 		}
 
         private void OnClick_load(object sender, RoutedEventArgs e)
@@ -45,7 +45,8 @@ namespace WpfApplication1
             {
 				//loadimage
 				imageData = new ImageData(ofd.FileName);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.MatImage);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+				comboBox.IsEnabled = true;
 
 				DataContext = new { Image = bitmapImage, Height = bitmapImage.Height, Width = bitmapImage.Width, FileName = imageData.FileName };
             }
@@ -62,7 +63,7 @@ namespace WpfApplication1
 				Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
 				Cv2.Canny(gray, canny, 100, 200);
 				var bitmapEdge = WriteableBitmapConverter.ToWriteableBitmap(canny);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.MatImage);
+				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
 				DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapEdge, Height = bitmapImage.Height, Width = bitmapImage.Width };
 			}
@@ -77,10 +78,23 @@ namespace WpfApplication1
 		}
 		private void comboBox_changed(object sender, RoutedEventArgs e)
 		{
+			//後でswitch
 			if (comboBox.SelectedIndex == 0)
 			{
-
+				if (CannyPanel != null)
+				{
+					CannyPanel.Visibility = Visibility.Visible;
+				}
 			}
+			else if(comboBox.SelectedIndex == 1)
+			{
+				CannyPanel.Visibility = Visibility.Hidden;
+			}
+		}
+
+		private void button_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
