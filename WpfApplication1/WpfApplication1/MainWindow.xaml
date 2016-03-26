@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApplication1"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfApplication1.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="425" Width="900" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="{x:Null}">
+        Title="MainWindow" MinHeight="425" Width="900" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="39" Width="300" />
         <StackPanel Orientation="Vertical">
@@ -21,6 +21,11 @@
                     <StackPanel x:Name="CannyPanel">
                         <Label HorizontalAlignment="Left" Margin="10,5,0,0" Content="Threshold1" Height="23"/>
                         <TextBox Width="80" Text="0" TextAlignment="Right" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+                    </StackPanel>
+                    <StackPanel x:Name="FASTPanel" Visibility="Collapsed">
+                        <Label HorizontalAlignment="Left" Margin="10,5,0,0" Content="Threshold" Height="23"/>
+                        <TextBox Width="80" Text="0" TextAlignment="Right" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+                        <Label HorizontalAlignment="Left" Margin="10,5,0,0" Content="Feature Point Color" Height="23"/>
                     </StackPanel>
                 </StackPanel>
                 <Image x:Name="image" MinHeight="400" MinWidth="400" Height="{Binding Height}" Width="{Binding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Image}"/>

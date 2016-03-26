@@ -81,14 +81,16 @@ namespace WpfApplication1
 			//後でswitch
 			if (comboBox.SelectedIndex == 0)
 			{
-				if (CannyPanel != null)
+				if (CannyPanel != null && FASTPanel != null)
 				{
 					CannyPanel.Visibility = Visibility.Visible;
+					FASTPanel.Visibility = Visibility.Collapsed;
 				}
 			}
 			else if(comboBox.SelectedIndex == 1)
 			{
-				CannyPanel.Visibility = Visibility.Hidden;
+				CannyPanel.Visibility = Visibility.Collapsed;
+				FASTPanel.Visibility = Visibility.Visible;
 			}
 		}
 
