@@ -88,14 +88,6 @@ namespace WpfApplication1 {
         #line default
         #line hidden
         
-        
-        #line 26 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TabControl tabControl;
-        
-        #line default
-        #line hidden
-        
         private bool _contentLoaded;
         
         /// <summary>
@@ -161,9 +153,6 @@ namespace WpfApplication1 {
             
             #line default
             #line hidden
-            return;
-            case 7:
-            this.tabControl = ((System.Windows.Controls.TabControl)(target));
             return;
             }
             this._contentLoaded = true;
