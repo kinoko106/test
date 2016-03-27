@@ -60,46 +60,6 @@
             <param name="x"></param>
             <param name="y"></param>
         </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.Angle">
-            <summary>
-            Calculates angle orientation of a blob.
-            This function uses central moments so cvCentralMoments should have been called before for this blob. (cvAngle)
-            </summary>
-            <returns>Angle orientation in radians.</returns>
-        </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.CalcCentroid">
-            <summary>
-            Calculates centroid.
-            Centroid will be returned and stored in the blob structure. (cvCentroid)
-            </summary>
-            <returns>Centroid.</returns>
-        </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.SaveImage(System.String,OpenCvSharp.IplImage)">
-            <summary>
-            Save the image of a blob to a file.
-            The function uses an image (that can be the original pre-processed image or a processed one, or even the result of cvRenderBlobs, for example) and a blob structure.
-            Then the function saves a copy of the part of the image where the blob is.
-            </summary>
-            <param name="fileName">Name of the file.</param>
-            <param name="img">Image.</param>
-        </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.SetImageRoiToBlob(OpenCvSharp.IplImage)">
-            <summary>
-            Set the ROI of an image to the bounding box of a blob.
-            </summary>
-            <param name="img">Image.</param>
-        </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.SetMoments">
-            <summary>
-            Set central/hu moments and centroid value from moment values (M**)
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Blob.CvBlob.Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:OpenCvSharp.Blob.CvBlob.Label">
             <summary>
             Label assigned to the blob
@@ -224,6 +184,46 @@
             <summary>
             Internal contours
             </summary>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.Angle">
+            <summary>
+            Calculates angle orientation of a blob.
+            This function uses central moments so cvCentralMoments should have been called before for this blob. (cvAngle)
+            </summary>
+            <returns>Angle orientation in radians.</returns>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.CalcCentroid">
+            <summary>
+            Calculates centroid.
+            Centroid will be returned and stored in the blob structure. (cvCentroid)
+            </summary>
+            <returns>Centroid.</returns>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.SaveImage(System.String,OpenCvSharp.IplImage)">
+            <summary>
+            Save the image of a blob to a file.
+            The function uses an image (that can be the original pre-processed image or a processed one, or even the result of cvRenderBlobs, for example) and a blob structure.
+            Then the function saves a copy of the part of the image where the blob is.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <param name="img">Image.</param>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.SetImageRoiToBlob(OpenCvSharp.IplImage)">
+            <summary>
+            Set the ROI of an image to the bounding box of a blob.
+            </summary>
+            <param name="img">Image.</param>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.SetMoments">
+            <summary>
+            Set central/hu moments and centroid value from moment values (M**)
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.Blob.CvBlob.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:OpenCvSharp.Blob.CvBlobLib">
             <summary>
@@ -572,6 +572,11 @@
             Blob set
             </summary>
         </member>
+        <member name="P:OpenCvSharp.Blob.CvBlobs.Labels">
+            <summary>
+            Label values
+            </summary>
+        </member>
         <member name="M:OpenCvSharp.Blob.CvBlobs.#ctor">
             <summary>
             Constructor (init only)
@@ -709,11 +714,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:OpenCvSharp.Blob.CvBlobs.Labels">
-            <summary>
-            Label values
-            </summary>
-        </member>
         <member name="T:OpenCvSharp.Blob.CvChainCode">
             <summary>
             Chain code (direction)
@@ -764,6 +764,16 @@
             
             </summary>
         </member>
+        <member name="P:OpenCvSharp.Blob.CvContourChainCode.StartingPoint">
+            <summary>
+            Point where contour begin.
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.Blob.CvContourChainCode.ChainCode">
+            <summary>
+            Polygon description based on chain codes.
+            </summary>
+        </member>
         <member name="M:OpenCvSharp.Blob.CvContourChainCode.#ctor">
             <summary>
             
@@ -799,16 +809,6 @@
             
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:OpenCvSharp.Blob.CvContourChainCode.StartingPoint">
-            <summary>
-            Point where contour begin.
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.Blob.CvContourChainCode.ChainCode">
-            <summary>
-            Polygon description based on chain codes.
-            </summary>
         </member>
         <member name="T:OpenCvSharp.Blob.CvContourPolygon">
             <summary>
@@ -1005,6 +1005,26 @@
             Label values for each pixel
             </summary>
         </member>
+        <member name="P:OpenCvSharp.Blob.LabelData.Values">
+            <summary>
+            Label value
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.Blob.LabelData.Roi">
+            <summary>
+            Region of interest
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.Blob.LabelData.Rows">
+            <summary>
+            Row length
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.Blob.LabelData.Cols">
+            <summary>
+            Column Length
+            </summary>
+        </member>
         <member name="M:OpenCvSharp.Blob.LabelData.#ctor(System.Int32,System.Int32)">
             <summary>
             
@@ -1049,6 +1069,14 @@
             <param name="col"></param>
             <param name="value"></param>
         </member>
+        <member name="P:OpenCvSharp.Blob.LabelData.Item(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="row"></param>
+            <param name="col"></param>
+            <returns></returns>
+        </member>
         <member name="M:OpenCvSharp.Blob.LabelData.DebugShow">
             <summary>
             
@@ -1058,34 +1086,6 @@
             <summary>
             Returns deep copied instance of this
             </summary>
-            <returns></returns>
-        </member>
-        <member name="P:OpenCvSharp.Blob.LabelData.Values">
-            <summary>
-            Label value
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.Blob.LabelData.Roi">
-            <summary>
-            Region of interest
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.Blob.LabelData.Rows">
-            <summary>
-            Row length
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.Blob.LabelData.Cols">
-            <summary>
-            Column Length
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.Blob.LabelData.Item(System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="row"></param>
-            <param name="col"></param>
             <returns></returns>
         </member>
         <member name="T:OpenCvSharp.Blob.Labeller">
@@ -1187,6 +1187,11 @@
             Up and left.
             </summary>
         </member>
+        <member name="F:OpenCvSharp.Blob.CvBlobConst.ChainCodeMoves">
+            <summary>
+            Move vectors of chain codes.
+            </summary>
+        </member>
         <member name="F:OpenCvSharp.Blob.CvBlobConst.CV_TRACK_RENDER_ID">
             <summary>
             Print the ID of each track in the image.
@@ -1205,11 +1210,6 @@
         <member name="F:OpenCvSharp.Blob.CvBlobConst.CV_TRACK_RENDER_TO_STD">
             <summary>
             Print track info to log out.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Blob.CvBlobConst.ChainCodeMoves">
-            <summary>
-            Move vectors of chain codes.
             </summary>
         </member>
         <member name="T:OpenCvSharp.Blob.RenderBlobsMode">
