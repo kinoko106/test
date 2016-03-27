@@ -56,47 +56,60 @@ namespace WpfApplication1
 		private void Submited(object sender, RoutedEventArgs e)
 		{
 			if (imageData.MatImage == null)return;
-			if (comboBox.SelectedIndex == 0)
+			switch (comboBox.SelectedIndex)
 			{
-				//edge
-				Mat gray = new Mat(Cv.Size(imageData.Width, imageData.Height),MatType.CV_8SC1),canny = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1);
-				Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
-				Cv2.Canny(gray, canny, 100, 200);
-				var bitmapEdge = WriteableBitmapConverter.ToWriteableBitmap(canny);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+				case 0://edge
+					int th1, th2;
+					th1 = int.Parse(CannyThreshold1.Text);
+					th2 = int.Parse(CannyThreshold2.Text);
+					Mat gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1), canny = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1);
+					Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
+					Cv2.Canny(gray, canny, th1, th2);
+					var bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(canny);
+					var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-				DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapEdge, Height = bitmapImage.Height, Width = bitmapImage.Width };
-			}
-			else if (comboBox.SelectedIndex == 1)
-			{
+					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
+					break;
+				case 1://fast 変
+					int th;
+					KeyPoint[] keypoints;
+					th = int.Parse(FASTThreashold.Text);
+					gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
+					Mat fast = imageData.MatImage.Clone();
+					Cv2.FAST(gray,out keypoints, th);
+					foreach(KeyPoint k in keypoints)
+					{
+						Cv2.Circle(fast, k.Pt, 1,new Scalar(0, 0, 255),-1);
+						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
+					}
+					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
+					bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-			}
-			else if (comboBox.SelectedIndex == 2)
-			{
-
+					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
+					break;
+				case 2:
+					break;
 			}
 		}
 		private void comboBox_changed(object sender, RoutedEventArgs e)
 		{
 			//後でswitch
-			if (comboBox.SelectedIndex == 0)
+			switch (comboBox.SelectedIndex)
 			{
-				if (CannyPanel != null && FASTPanel != null)
-				{
-					CannyPanel.Visibility = Visibility.Visible;
-					FASTPanel.Visibility = Visibility.Collapsed;
-				}
+				case 0://select canny
+					if (CannyPanel != null && FASTPanel != null)
+					{
+						CannyPanel.Visibility = Visibility.Visible;
+						FASTPanel.Visibility = Visibility.Collapsed;
+					}
+					break;
+				case 1://select fast
+					CannyPanel.Visibility = Visibility.Collapsed;
+					FASTPanel.Visibility = Visibility.Visible;
+					break;
+				case 2://select cdfast
+					break;
 			}
-			else if(comboBox.SelectedIndex == 1)
-			{
-				CannyPanel.Visibility = Visibility.Collapsed;
-				FASTPanel.Visibility = Visibility.Visible;
-			}
-		}
-
-		private void button_Click(object sender, RoutedEventArgs e)
-		{
-
 		}
 	}
 }

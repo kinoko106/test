@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("opencvsharpextern.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/6bea1e504752d6ae9971e2db193fd89dffaffdae1450314491.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/kancolle-150925-17444353.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/syokaku.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/syokaku6.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/vzny436a.png")]
 
 
