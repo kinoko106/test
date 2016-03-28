@@ -70,16 +70,17 @@ namespace WpfApplication1
 
 					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
 					break;
-				case 1://fast 変
+				case 1:
 					int th;
 					KeyPoint[] keypoints;
 					th = int.Parse(FASTThreashold.Text);
 					gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
 					Mat fast = imageData.MatImage.Clone();
+					Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
 					Cv2.FAST(gray,out keypoints, th);
-					foreach(KeyPoint k in keypoints)
+					foreach (KeyPoint k in keypoints)
 					{
-						Cv2.Circle(fast, k.Pt, 1,new Scalar(0, 0, 255),-1);
+						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
 						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
 					}
 					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
