@@ -27,7 +27,7 @@
                     <ComboBoxItem Content="FAST"/>
                     <ComboBoxItem Content="CDFAST"/>
                 </ComboBox>
-                <Grid x:Name="CannyPanel" Visibility="Visible">
+                <Grid x:Name="CannyPanel" Visibility="Collapsed">
                     <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="Margin" Value="10,5,0,0"/>
@@ -55,7 +55,7 @@
                     <TextBox x:Name="CannyThreshold2" Text="200" Grid.Column="1" Grid.Row="1"/>
                 </Grid>
                 <Grid x:Name="FASTPanel" Visibility="Collapsed">
-                                        <Grid.Resources>
+                   <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="Margin" Value="10,5,0,0"/>
                             <Setter Property="Height" Value="23"/>
@@ -75,12 +75,45 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Content="Threshold" Grid.Column="0" Grid.Row="0"/>
                     <TextBox x:Name="FASTThreashold" Text="100" Grid.Column="1" Grid.Row="0"/>
                     <Label Content="Color" Grid.Column="0" Grid.Row="1"/>
                     <!--マウスオーバーで色が変化する仕様は後で直す-->
         <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="1" Width="25" Height="25" Background="Red" BorderBrush="Red" />
+        <Label Content="keypoints : " Grid.Column="0" Grid.Row="2"/>
+        <Label Content="{Binding KeypointNum}" Grid.Column="1" Grid.Row="2"/>
+        </Grid>
+                <Grid x:Name="CDFASTPannel" Visibility="Collapsed">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Margin" Value="10,5,0,0"/>
+                    <Setter Property="Height" Value="23"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Width" Value="25"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="Margin" Value="0,5,5,5"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Threshold" Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="CDFASTThreashold" Text="100" Grid.Column="1" Grid.Row="0"/>
+            <Label Content="Color" Grid.Column="0" Grid.Row="1"/>
+            <!--マウスオーバーで色が変化する仕様は後で直す-->
+            <Button x:Name="ColorButton2" Grid.Column="1" Grid.Row="1" Width="25" Height="25" Background="Red" BorderBrush="Red" />
+            <Label Content="{Binding KeypointNum}" Grid.Column="0" Grid.Row="2"/>
         </Grid>
         <Label Content="{Binding Height}" Height="25"/>
         <Label Content="{Binding Width}" Height="25"/>

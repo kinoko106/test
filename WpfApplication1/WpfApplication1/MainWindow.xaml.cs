@@ -71,13 +71,14 @@ namespace WpfApplication1
 					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
 					break;
 				case 1:
-					int th;
+					int th,kptnum;
 					KeyPoint[] keypoints;
 					th = int.Parse(FASTThreashold.Text);
 					gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
 					Mat fast = imageData.MatImage.Clone();
 					Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
 					Cv2.FAST(gray,out keypoints, th);
+					kptnum = keypoints.Length;
 					foreach (KeyPoint k in keypoints)
 					{
 						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
@@ -86,7 +87,7 @@ namespace WpfApplication1
 					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
 					bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
+					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum};
 					break;
 				case 2:
 					break;
@@ -94,7 +95,6 @@ namespace WpfApplication1
 		}
 		private void comboBox_changed(object sender, RoutedEventArgs e)
 		{
-			//後でswitch
 			switch (comboBox.SelectedIndex)
 			{
 				case 0://select canny
@@ -102,13 +102,18 @@ namespace WpfApplication1
 					{
 						CannyPanel.Visibility = Visibility.Visible;
 						FASTPanel.Visibility = Visibility.Collapsed;
+						CDFASTPannel.Visibility = Visibility.Collapsed;
 					}
 					break;
 				case 1://select fast
 					CannyPanel.Visibility = Visibility.Collapsed;
 					FASTPanel.Visibility = Visibility.Visible;
+					CDFASTPannel.Visibility = Visibility.Collapsed;
 					break;
 				case 2://select cdfast
+					CannyPanel.Visibility = Visibility.Collapsed;
+					FASTPanel.Visibility = Visibility.Collapsed;
+					CDFASTPannel.Visibility = Visibility.Visible;
 					break;
 			}
 		}
