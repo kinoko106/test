@@ -53,52 +53,58 @@ namespace knk
 				Keypoints = kpt.ToArray();
 				return;
 			}
-
-			for (int y = 0; y < src.Rows; y++)
+			int x = 0, y= 0;
+			try
 			{
-				for (int x = 0; x < src.Cols; y++)
+				for (y = 3; y < src.Rows - 3; y++)
 				{
-					int[] discrimination = new int[16];   //sililar 0 ; disimilar 1
-					for (int i = 0; i < 16; i++)
+					for (x = 3; x < src.Cols - 3; y++)
 					{
-						Vec3b lab1 = src.At<Vec3b>(y, x);
-						Vec3b lab2 = src.At<Vec3b>(y + table[i, 0], x + table[i, 1]);
-						double deltaE = CIE1976(lab1, lab2);
-						if ((deltaE - threshold) >= 0)
+						int[] discrimination = new int[16];   //sililar 0 ; disimilar 1
+						for (int i = 0; i < 16; i++)
 						{
-							discrimination[i] = 1;
-						}
-						else
-						{
-							discrimination[i] = 0;
-						}
-					}
-					int n = 0;
-					for (int i = 0; i < 8; i++)
-					{
-						if ((discrimination[i] + discrimination[i + 8]) != 0)
-							continue;
-						n = 1;
-						for (int j = i + 1; j < i + 8; j++)
-						{
-							if (discrimination[num[j]] == 1)
-								n++;
+							Vec3b lab1 = src.At<Vec3b>(y, x);
+							Vec3b lab2 = src.At<Vec3b>(y + table[i, 0], x + table[i, 1]);
+							double deltaE = CIE1976(lab1, lab2);
+							if ((deltaE - threshold) >= 0)
+							{
+								discrimination[i] = 1;
+							}
 							else
 							{
-								i = j;
+								discrimination[i] = 0;
+							}
+						}
+						int n = 0;
+						for (int i = 0; i < 8; i++)
+						{
+							if ((discrimination[i] + discrimination[i + 8]) != 0)
+								continue;
+							n = 1;
+							for (int j = i + 1; j < i + 8; j++)
+							{
+								if (discrimination[num[j]] == 1)
+									n++;
+								else
+								{
+									i = j;
+									break;
+								}
+							}
+							if (n >= 8)
+							{
+								kpt.Add(new KeyPoint(x, y, 0));
 								break;
 							}
 						}
-						if (n >= 8)
-						{
-							kpt.Add(new KeyPoint(x, y, 0));
-							break;
-						}
 					}
 				}
+				Keypoints = kpt.ToArray();
+			}catch
+			{
+				Console.WriteLine("x:{0}  y:{1}", x, y);
+				Keypoints = kpt.ToArray();
 			}
-			Keypoints = kpt.ToArray();
 		}
 	}
-}
 }

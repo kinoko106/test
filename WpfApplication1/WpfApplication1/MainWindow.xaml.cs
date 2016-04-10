@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using OpenCvSharp;
 using OpenCvSharp.CPlusPlus;
 using OpenCvSharp.Extensions;
+using knk;
 
 namespace WpfApplication1
 {
@@ -90,6 +91,20 @@ namespace WpfApplication1
 					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum};
 					break;
 				case 2:
+					th = int.Parse(FASTThreashold.Text);
+					fast = imageData.MatImage.Clone();
+					//Cv2.CvtColor(fast, fast, ColorConversion.BgrToGray);
+					KNK.CDFAST(fast,out keypoints, th);
+					kptnum = keypoints.Length;
+					foreach(KeyPoint k in keypoints)
+					{
+						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
+						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
+					}
+					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
+					bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+
+					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum };
 					break;
 			}
 		}
