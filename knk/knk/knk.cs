@@ -42,6 +42,7 @@ namespace knk
 		{
 			return 0;
 		}
+        //遅いの何とかする
 		public static void CDFAST(Mat src,out KeyPoint[] Keypoints, double threshold = 100.0, bool nonmaxSupression = false)
 		{
 			int[,] table = new int[16, 2] { { 0, -3 }, { 1, -3 }, { 2, -2 }, { 3, -1 }, { 3, 0 }, { 3, 1 }, { 2, 2 }, { 1, 3 }, { 0, 3 }, { -1, 3 }, { -2, 2 }, { -3, 1 }, { -3, 0 }, { -3, -1 }, { -2, -2 }, { -1, -3 } };
