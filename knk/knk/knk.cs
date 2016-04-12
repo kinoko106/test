@@ -58,8 +58,12 @@ namespace knk
 			{
 				for (y = 3; y < src.Rows - 3; y++)
 				{
-					for (x = 3; x < src.Cols - 3; y++)
+					for (x = 3; x < src.Cols - 3; x++)
 					{
+						if (y > src.Rows - 3 || x > src.Cols - 3)
+						{
+							System.Threading.Thread.Sleep(1000);
+						}
 						int[] discrimination = new int[16];   //sililar 0 ; disimilar 1
 						for (int i = 0; i < 16; i++)
 						{

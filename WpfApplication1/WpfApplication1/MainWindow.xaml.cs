@@ -26,7 +26,8 @@ namespace WpfApplication1
     public partial class MainWindow : System.Windows.Window
     {
 		ImageData imageData;
-		
+
+		Dictionary<string, KeyPoint[]> kptData = new Dictionary<string, KeyPoint[]>();
 
         public MainWindow()
         {	
@@ -91,12 +92,18 @@ namespace WpfApplication1
 					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum};
 					break;
 				case 2:
-					th = int.Parse(FASTThreashold.Text);
+					th = int.Parse(CDFASTThreashold.Text);
 					fast = imageData.MatImage.Clone();
-					//Cv2.CvtColor(fast, fast, ColorConversion.BgrToGray);
-					KNK.CDFAST(fast,out keypoints, th);
+					if(kptData.ContainsKey(CDFASTThreashold.Text) == false)
+					{
+						KNK.CDFAST(fast, out keypoints, th);
+						kptData[CDFASTThreashold.Text] = keypoints;
+					}else
+					{
+						keypoints = kptData[CDFASTThreashold.Text];
+					}
 					kptnum = keypoints.Length;
-					foreach(KeyPoint k in keypoints)
+					foreach (KeyPoint k in keypoints)
 					{
 						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
 						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
