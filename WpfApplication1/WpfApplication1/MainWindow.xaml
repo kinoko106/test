@@ -119,7 +119,7 @@
         <Label Content="{Binding Width}" Height="25"/>
         <Button x:Name="button1" Click="Submited" Content="Submit" VerticalAlignment="Bottom"/>
         </StackPanel>
-        <StackPanel Orientation="Vertical">
+        <StackPanel x:Name="ImagePanel" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Image">
@@ -139,6 +139,7 @@
         </StackPanel>
         <Grid Height="30" VerticalAlignment="Bottom" Background="#FF007ACC">
             <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" MinWidth="100"/>
+            <Button x:Name="testButton" Content="test" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         </Grid>
         </StackPanel>
         </Grid>

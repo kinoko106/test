@@ -28,7 +28,7 @@ namespace knk
 			long frequency = 0;
 			QueryPerformanceFrequency(ref frequency);
 			double t = (stopCounter - startCounter) * 1000.0 / frequency;
-			Console.WriteLine(t.ToString());
+			Console.WriteLine(t.ToString() + "ms");
 		}
 	}
 }

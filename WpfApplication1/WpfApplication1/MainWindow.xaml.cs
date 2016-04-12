@@ -96,12 +96,22 @@ namespace WpfApplication1
 					fast = imageData.MatImage.Clone();
 					if(kptData.ContainsKey(CDFASTThreashold.Text) == false)
 					{
-						KNK.CDFAST(fast, out keypoints, th);
-						kptData[CDFASTThreashold.Text] = keypoints;
-					}else
+                        KNK.CDFAST(fast, out keypoints, th);
+                        kptData[CDFASTThreashold.Text] = keypoints;
+                        //Action act = async () =>
+                        //                  {
+                        //                      await Task.Run(() => 
+                        //                      {
+                        //                          KNK.CDFAST(fast, out keypoints, th);
+                        //                          kptData[CDFASTThreashold.Text] = keypoints;
+                        //                      });
+                        //};
+                    }
+                    else
 					{
 						keypoints = kptData[CDFASTThreashold.Text];
 					}
+                    //keypoints = new KeyPoint[1];keypoints[0] = new KeyPoint(1, 1, 1);
 					kptnum = keypoints.Length;
 					foreach (KeyPoint k in keypoints)
 					{
