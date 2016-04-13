@@ -54,7 +54,7 @@
                     <Label Content="Threshold2" Grid.Column="0" Grid.Row="1"/>
                     <TextBox x:Name="CannyThreshold2" Text="200" Grid.Column="1" Grid.Row="1"/>
                 </Grid>
-                <Grid x:Name="FASTPanel" Visibility="Collapsed">
+                <Grid x:Name="FASTPanel" Visibility="Visible">
                    <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="Margin" Value="10,5,0,0"/>
@@ -62,7 +62,7 @@
                             <Setter Property="HorizontalAlignment" Value="Left"/>
                         </Style>
                         <Style TargetType="TextBox">
-                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="Width" Value="30"/>
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0,5,5,5"/>
                             <Setter Property="TextAlignment" Value="Center"/>
@@ -76,15 +76,17 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Content="Threshold" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox x:Name="FASTThreashold" Text="100" Grid.Column="1" Grid.Row="0"/>
+                    <TextBox x:Name="FASTThreashold" Text="{Binding sliderValue}" Grid.Column="1" Grid.Row="0"/>
                     <Label Content="Color" Grid.Column="0" Grid.Row="1"/>
                     <!--マウスオーバーで色が変化する仕様は後で直す-->
-        <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="1" Width="25" Height="25" Background="Red" BorderBrush="Red" />
-        <Label Content="keypoints : " Grid.Column="0" Grid.Row="2"/>
-        <Label Content="{Binding KeypointNum}" Grid.Column="1" Grid.Row="2"/>
-        </Grid>
+        <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="1" Width="30" Height="25" Margin="5,5,5,5" Background="Red" BorderBrush="Red" />
+        <Slider x:Name="thSlider" Grid.Column="0" Grid.Row="2" SmallChange="1" LargeChange="20" Maximum="255" />
+        <Label Content="keypoints : " Grid.Column="0" Grid.Row="3"/>
+                    <Label Content="{Binding KeypointNum}" Grid.Column="1" Grid.Row="3"/>
+                </Grid>
                 <Grid x:Name="CDFASTPannel" Visibility="Collapsed">
             <Grid.Resources>
                 <Style TargetType="Label">
@@ -93,7 +95,7 @@
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </Style>
                 <Style TargetType="TextBox">
-                    <Setter Property="Width" Value="25"/>
+                    <Setter Property="Width" Value="30"/>
                     <Setter Property="HorizontalAlignment" Value="Right"/>
                     <Setter Property="Margin" Value="0,5,5,5"/>
                     <Setter Property="TextAlignment" Value="Center"/>
@@ -139,7 +141,6 @@
         </StackPanel>
         <Grid Height="30" VerticalAlignment="Bottom" Background="#FF007ACC">
             <Label x:Name="label" Content="{Binding FileName}" HorizontalAlignment="Left" MinWidth="100"/>
-            <Button x:Name="testButton" Content="test" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         </Grid>
         </StackPanel>
         </Grid>

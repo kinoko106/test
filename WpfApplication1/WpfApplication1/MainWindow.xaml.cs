@@ -25,14 +25,14 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-		ImageData imageData;
+        ImageData imageData;
 
-		Dictionary<string, KeyPoint[]> kptData = new Dictionary<string, KeyPoint[]>();
+        Dictionary<string, KeyPoint[]> kptData = new Dictionary<string, KeyPoint[]>();
 
         public MainWindow()
-        {	
+        {
             InitializeComponent();
-		}
+        }
 
         private void OnClick_load(object sender, RoutedEventArgs e)
         {
@@ -45,109 +45,126 @@ namespace WpfApplication1
             };
             if (ofd.ShowDialog(Application.Current.MainWindow) == true)
             {
-				//loadimage
-				imageData = new ImageData(ofd.FileName);
-				var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
-				comboBox.IsEnabled = true;
+                //loadimage
+                imageData = new ImageData(ofd.FileName);
+                var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+                comboBox.IsEnabled = true;
 
-				DataContext = new { Image = bitmapImage, Height = bitmapImage.Height, Width = bitmapImage.Width, FileName = imageData.FileName };
+                DataContext = new { Image = bitmapImage, Height = bitmapImage.Height, Width = bitmapImage.Width, FileName = imageData.FileName };
             }
 
         }
 
-		private void Submited(object sender, RoutedEventArgs e)
-		{
-			if (imageData.MatImage == null)return;
-			switch (comboBox.SelectedIndex)
-			{
-				case 0://edge
-					int th1, th2;
-					th1 = int.Parse(CannyThreshold1.Text);
-					th2 = int.Parse(CannyThreshold2.Text);
-					Mat gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1), canny = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1);
-					Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
-					Cv2.Canny(gray, canny, th1, th2);
-					var bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(canny);
-					var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+        private void Submited(object sender, RoutedEventArgs e)
+        {
+            if (imageData.MatImage == null) return;
+            switch (comboBox.SelectedIndex)
+            {
+                case 0://edge
+                    int th1, th2;
+                    th1 = int.Parse(CannyThreshold1.Text);
+                    th2 = int.Parse(CannyThreshold2.Text);
+                    Mat gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1), canny = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8SC1);
+                    Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
+                    Cv2.Canny(gray, canny, th1, th2);
+                    var bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(canny);
+                    var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
-					break;
-				case 1:
-					int th,kptnum;
-					KeyPoint[] keypoints;
-					th = int.Parse(FASTThreashold.Text);
-					gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
-					Mat fast = imageData.MatImage.Clone();
-					Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
-					Cv2.FAST(gray,out keypoints, th);
-					kptnum = keypoints.Length;
-					foreach (KeyPoint k in keypoints)
-					{
-						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
-						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
-					}
-					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
-					bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+                    DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width };
+                    break;
+                case 1:
+                    int th, kptnum;
+                    KeyPoint[] keypoints;
+                    th = int.Parse(FASTThreashold.Text);
+                    gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
+                    Mat fast = imageData.MatImage.Clone();
+                    Cv2.CvtColor(imageData.MatImage, gray, ColorConversion.BgrToGray);
+                    Cv2.FAST(gray, out keypoints, th);
+                    kptnum = keypoints.Length;
+                    foreach (KeyPoint k in keypoints)
+                    {
+                        Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
+                        Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
+                    }
+                    bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
+                    bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum};
-					break;
-				case 2:
-					th = int.Parse(CDFASTThreashold.Text);
-					fast = imageData.MatImage.Clone();
-					if(kptData.ContainsKey(CDFASTThreashold.Text) == false)
-					{
+                    DataContext = new
+                    {
+                        FileName = imageData.FileName,
+                        Image = bitmapImage,
+                        Edge = bitmapProcessed,
+                        Height = bitmapImage.Height,
+                        Width = bitmapImage.Width,
+                        KeypointNum = kptnum
+                    };
+                    break;
+                case 2:
+                    th = int.Parse(CDFASTThreashold.Text);
+                    fast = imageData.MatImage.Clone();
+                    if (kptData.ContainsKey(CDFASTThreashold.Text) == false)
+                    {
                         KNK.CDFAST(fast, out keypoints, th);
                         kptData[CDFASTThreashold.Text] = keypoints;
                         //Action act = async () =>
                         //                  {
-                        //                      await Task.Run(() => 
+                        //                      await Task.Run(() =>
                         //                      {
                         //                          KNK.CDFAST(fast, out keypoints, th);
                         //                          kptData[CDFASTThreashold.Text] = keypoints;
                         //                      });
-                        //};
+                        //                  };
+                        //act();
                     }
                     else
-					{
-						keypoints = kptData[CDFASTThreashold.Text];
-					}
-                    //keypoints = new KeyPoint[1];keypoints[0] = new KeyPoint(1, 1, 1);
-					kptnum = keypoints.Length;
-					foreach (KeyPoint k in keypoints)
-					{
-						Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
-						Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
-					}
-					bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
-					bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+                    {
+                        keypoints = kptData[CDFASTThreashold.Text];
+                    }
+                    //keypoints = new KeyPoint[1]; keypoints[0] = new KeyPoint(1, 1, 1);
+                    kptnum = keypoints.Length;
+                    foreach (KeyPoint k in keypoints)
+                    {
+                        Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
+                        Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
+                    }
+                    bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
+                    bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
 
-					DataContext = new { FileName = imageData.FileName, Image = bitmapImage, Edge = bitmapProcessed, Height = bitmapImage.Height, Width = bitmapImage.Width, KeypointNum = kptnum };
-					break;
-			}
-		}
-		private void comboBox_changed(object sender, RoutedEventArgs e)
-		{
-			switch (comboBox.SelectedIndex)
-			{
-				case 0://select canny
-					if (CannyPanel != null && FASTPanel != null)
-					{
-						CannyPanel.Visibility = Visibility.Visible;
-						FASTPanel.Visibility = Visibility.Collapsed;
-						CDFASTPannel.Visibility = Visibility.Collapsed;
-					}
-					break;
-				case 1://select fast
-					CannyPanel.Visibility = Visibility.Collapsed;
-					FASTPanel.Visibility = Visibility.Visible;
-					CDFASTPannel.Visibility = Visibility.Collapsed;
-					break;
-				case 2://select cdfast
-					CannyPanel.Visibility = Visibility.Collapsed;
-					FASTPanel.Visibility = Visibility.Collapsed;
-					CDFASTPannel.Visibility = Visibility.Visible;
-					break;
-			}
-		}
-	}
+                    DataContext = new
+                    {
+                        FileName = imageData.FileName,
+                        Image = bitmapImage,
+                        Edge = bitmapProcessed,
+                        Height = bitmapImage.Height,
+                        Width = bitmapImage.Width,
+                        KeypointNum = kptnum
+                    };
+                    break;
+            }
+        }
+        private void comboBox_changed(object sender, RoutedEventArgs e)
+        {
+            switch (comboBox.SelectedIndex)
+            {
+                case 0://select canny
+                    if (CannyPanel != null && FASTPanel != null)
+                    {
+                        CannyPanel.Visibility = Visibility.Visible;
+                        FASTPanel.Visibility = Visibility.Collapsed;
+                        CDFASTPannel.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 1://select fast
+                    CannyPanel.Visibility = Visibility.Collapsed;
+                    FASTPanel.Visibility = Visibility.Visible;
+                    CDFASTPannel.Visibility = Visibility.Collapsed;
+                    break;
+                case 2://select cdfast
+                    CannyPanel.Visibility = Visibility.Collapsed;
+                    FASTPanel.Visibility = Visibility.Collapsed;
+                    CDFASTPannel.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+    }
 }
