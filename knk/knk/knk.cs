@@ -109,5 +109,68 @@ namespace knk
             }
             Keypoints = kpt.ToArray();
         }
+        public static KeyPoint[] CDFAST(Mat src, double threshold = 100.0, bool nonmaxSupression = false)
+        {
+            int[,] table = new int[16, 2] { { 0, -3 }, { 1, -3 }, { 2, -2 }, { 3, -1 }, { 3, 0 }, { 3, 1 }, { 2, 2 }, { 1, 3 }, { 0, 3 }, { -1, 3 }, { -2, 2 }, { -3, 1 }, { -3, 0 }, { -3, -1 }, { -2, -2 }, { -1, -3 } };
+            int[] num = new int[30] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+            long step = src.Step();
+            int channels = src.Channels();
+            List<KeyPoint> kpt = new List<KeyPoint>();
+
+            if (src.Channels() != 3)
+            {
+                return kpt.ToArray();
+            }
+            int x = 0, y = 0;
+
+            unsafe
+            {
+                byte* ptr = src.DataPointer;
+                for (y = 3; y < src.Rows - 3; y++)
+                {
+                    for (x = 3; x < src.Cols - 3; x++)
+                    {
+                        int[] discrimination = new int[16];   //sililar 0 ; disimilar 1
+                        for (int i = 0; i < 16; i++)
+                        {
+                            Vec3b lab1 = new Vec3b(ptr[y * step + x * channels], ptr[y * step + x * channels + 1], ptr[y * step + x * channels + 2]);
+                            Vec3b lab2 = new Vec3b(ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 1], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 2]);
+                            double deltaE = CIE1976(lab1, lab2);
+                            if ((deltaE - threshold) >= 0)
+                            {
+                                discrimination[i] = 1;
+                            }
+                            else
+                            {
+                                discrimination[i] = 0;
+                            }
+                        }
+                        int n = 0;
+                        for (int i = 0; i < 8; i++)
+                        {
+                            if ((discrimination[i] + discrimination[i + 8]) != 0)
+                                continue;
+                            n = 1;
+                            for (int j = i + 1; j < i + 8; j++)
+                            {
+                                if (discrimination[num[j]] == 1)
+                                    n++;
+                                else
+                                {
+                                    i = j;
+                                    break;
+                                }
+                            }
+                            if (n >= 8)
+                            {
+                                kpt.Add(new KeyPoint(x, y, 0));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return kpt.ToArray();
+        }
     }
 }
