@@ -187,15 +187,34 @@ namespace WpfApplication1
         //引数取りたい
         private async void CDFAST_submit_Click(object sender, RoutedEventArgs e)
         {
+            KeyPoint[] keypoints;
+            Mat cdfast = imageData.MatImage.Clone();
+            int threashold = int.Parse(CDFASTThreashold.Text);
+
             Load.IsEnabled = false;
             process_comboBox.IsEnabled = false;
-            await Task.Run(() => {
-                //ここにCDFAST
-                //実際は10秒ぐらいかかる
-                Thread.Sleep(3000);
-            });
+            keypoints = await Task.Run(() => KNK.CDFAST(cdfast, 100));
             Load.IsEnabled = true;
             process_comboBox.IsEnabled = true;
+
+            var kptnum = keypoints.Length;
+            foreach (KeyPoint k in keypoints)
+            {
+                Cv2.Circle(cdfast, k.Pt, 1, new Scalar(0, 0, 255), -1);
+                Cv2.Circle(cdfast, k.Pt, 5, new Scalar(0, 0, 255));
+            }
+            var bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(cdfast);
+            var bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
+
+            DataContext = new
+            {
+                FileName = imageData.FileName,
+                Image = bitmapImage,
+                Edge = bitmapProcessed,
+                Height = bitmapImage.Height,
+                Width = bitmapImage.Width,
+                KeypointNum = kptnum
+            };
         }
     }
 }

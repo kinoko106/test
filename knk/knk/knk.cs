@@ -71,7 +71,7 @@ namespace knk
                             //Vec3b lab1 = src.At<Vec3b>(y, x);
                             //Vec3b lab2 = src.At<Vec3b>(y + table[i, 0], x + table[i, 1]);
                             Vec3b lab1 = new Vec3b(ptr[y * step + x * channels], ptr[y * step + x * channels + 1], ptr[y * step + x * channels + 2]);
-                            Vec3b lab2 = new Vec3b(ptr[(y + table[i,0]) * step + (x + table[i,1]) * channels], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 1], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 2]);
+                            Vec3b lab2 = new Vec3b(ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 1], ptr[(y + table[i, 0]) * step + (x + table[i, 1]) * channels + 2]);
                             double deltaE = CIE1976(lab1, lab2);
                             if ((deltaE - threshold) >= 0)
                             {
@@ -109,6 +109,7 @@ namespace knk
             }
             Keypoints = kpt.ToArray();
         }
+
         public static KeyPoint[] CDFAST(Mat src, double threshold = 100.0, bool nonmaxSupression = false)
         {
             int[,] table = new int[16, 2] { { 0, -3 }, { 1, -3 }, { 2, -2 }, { 3, -1 }, { 3, 0 }, { 3, 1 }, { 2, 2 }, { 1, 3 }, { 0, 3 }, { -1, 3 }, { -2, 2 }, { -3, 1 }, { -3, 0 }, { -3, -1 }, { -2, -2 }, { -1, -3 } };
@@ -171,6 +172,11 @@ namespace knk
                 }
             }
             return kpt.ToArray();
+        }
+
+        public static Task<KeyPoint[]> CDFASTAsync(Mat src, double threshold = 100.0, bool nonmaxSupression = false)
+        {
+            return new Task<KeyPoint[]>(() => CDFAST(src, threshold));
         }
     }
 }
