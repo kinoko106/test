@@ -7,9 +7,52 @@
         mc:Ignorable="d"
         Title="MainWindow" MaxHeight="580" MaxWidth="600">
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" MaxHeight="{Binding Height}"  MaxWidth="{Binding Width}" Margin="0,0,0,0" VerticalAlignment="Top" Source="{Binding IMAGE}"/>
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top" Width="75" Click="button1_click"/>
-        <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="95,480,0,0" VerticalAlignment="Top" Width="75" Click="button2_click"/>
-        <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" Margin="180,480,0,0" VerticalAlignment="Top" Width="75" Click="button3_Click"/>
+        <Grid Width="300" Height="580" HorizontalAlignment="Left">
+            <Image x:Name="image" HorizontalAlignment="Left" MaxHeight="{Binding Height}"  MaxWidth="{Binding Width}" Margin="0,0,0,0" VerticalAlignment="Top" Source="{Binding IMAGE}"/>
+            <Button x:Name="button1" Content="Button1" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top" Width="75" Click="button1_click"/>
+            <Button x:Name="button2" Content="Button2" HorizontalAlignment="Left" Margin="100,480,0,0" VerticalAlignment="Top" Width="75" Click="button2_click"/>
+        </Grid>
+        <Grid HorizontalAlignment="Right" Width="300" Height="400" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Label Content="{Binding key1}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="0"/>
+            <Label Content="{Binding th1}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="{Binding key2}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="{Binding th2}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="{Binding key3}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="2"/>
+            <Label Content="{Binding th3}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="2"/>
+            <Label Content="{Binding key4}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="3"/>
+            <Label Content="{Binding th4}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="3"/>
+            <Label Content="{Binding key5}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="4"/>
+            <Label Content="{Binding th5}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="4"/>
+            <Label Content="{Binding key6}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="5"/>
+            <Label Content="{Binding th6}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="5"/>
+            <Label Content="{Binding key7}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="6"/>
+            <Label Content="{Binding th7}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="6"/>
+            <Label Content="{Binding key8}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="7"/>
+            <Label Content="{Binding th8}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="7"/>
+            <Label Content="{Binding key9}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="8"/>
+            <Label Content="{Binding th9}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="8"/>
+            <Label Content="{Binding key10}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="9"/>
+            <Label Content="{Binding th10}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="9"/>
+            <Label Content="{Binding key11}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="10"/>
+            <TextBox x:Name="threashold" Text="" Grid.Column="0" Grid.Row="11" Width="70" Height="30"/>
+        </Grid>
     </Grid>
 </Window>

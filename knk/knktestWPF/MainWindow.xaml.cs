@@ -34,7 +34,7 @@ namespace knktestWPF
 
             try
             {
-                img = Cv2.ImRead("shokaku2.jpg");
+                img = Cv2.ImRead("shokaku.jpg");
             }
             catch (Exception e)
             {
@@ -54,41 +54,53 @@ namespace knktestWPF
             //k = await Task.Run(() => KNK.CDFASTAsync(img, 100));
             //k = task.Result;
 
+            int th = int.Parse(threashold.Text);
             Mat m = img.Clone();
-            button2.IsEnabled = false;
-            k = await Task.Run(() => KNK.CDFAST(m, 100));
-            button2.IsEnabled = true;
+            k = await Task.Run(() => KNK.CDFAST(m, th));
 
             foreach (KeyPoint key in k)
             {
-                Cv2.Circle(img, key.Pt, 3, new Scalar(255, 0, 0));
+                Cv2.Circle(m, key.Pt, 3, new Scalar(255, 0, 0));
             }
 
-            var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(img);
-            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap };
+            var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(m);
+            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap ,key11 = k.Length };
         }
 
         private void button2_click(object sender, RoutedEventArgs e)
         {
-            Mat m = Cv2.ImRead("shokaku2.jpg");
-            KeyPoint[] k;
+            List<KeyPoint[]> keypoints = new List<KeyPoint[]>();
+            int[] th = new int[10];
 
-            k = KNK.CDFAST(m, 100);
-
-            Thread.Sleep(3000);
-
-            foreach (KeyPoint key in k)
+            for (int i = 0; i < 10; i++)
             {
-                Cv2.Circle(img, key.Pt, 3, new Scalar(255, 0, 0));
+                th[i] = 100 * (i + 1);
+                keypoints.Add(KNK.CDFAST(img,th[i],false));
             }
 
-            var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(img);
-            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap };
-        }
-
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("foo!","foofoo");
+            DataContext = new
+            {
+                key1 = keypoints[0].Length,
+                key2 = keypoints[1].Length,
+                key3 = keypoints[2].Length,
+                key4 = keypoints[3].Length,
+                key5 = keypoints[4].Length,
+                key6 = keypoints[5].Length,
+                key7 = keypoints[6].Length,
+                key8 = keypoints[7].Length,
+                key9 = keypoints[8].Length,
+                key10 = keypoints[9].Length,
+                th1 = th[0],
+                th2 = th[1],
+                th3 = th[2],
+                th4 = th[3],
+                th5 = th[4],
+                th6 = th[5],
+                th7 = th[6],
+                th8 = th[7],
+                th9 = th[8],
+                th10 = th[9]
+            };
         }
     }
 }

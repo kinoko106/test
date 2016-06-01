@@ -54,6 +54,14 @@ namespace WpfApplication1
                 DataContext = new { Image = bitmapImage, Height = bitmapImage.Height, Width = bitmapImage.Width, FileName = imageData.FileName };
             }
 
+            if(imageData != null)
+            {
+                Submit.IsEnabled = true;
+                CDFAST_submit.IsEnabled = true;
+            }else
+            {
+                MessageBox.Show("imagedata faild to load!");
+            }
         }
 
         private void Submited(object sender, RoutedEventArgs e)

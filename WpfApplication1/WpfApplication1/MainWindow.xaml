@@ -120,8 +120,8 @@
         <Label Content="{Binding Height}" Height="25"/>
         <Label Content="{Binding Width}" Height="25"/>
         <Grid >
-            <Button x:Name="Submit" Click="Submited" Content="Submit" VerticalAlignment="Bottom"/>
-            <Button x:Name="CDFAST_submit" Click="CDFAST_submit_Click" Content="Submit" VerticalAlignment="Bottom"/>
+            <Button x:Name="Submit" Click="Submited" Content="Submit" VerticalAlignment="Bottom" IsEnabled="False"/>
+            <Button x:Name="CDFAST_submit" Click="CDFAST_submit_Click" Content="Submit" VerticalAlignment="Bottom" IsEnabled="False" Visibility="Collapsed"/>
         </Grid>
 
         </StackPanel>
