@@ -118,46 +118,7 @@ namespace WpfApplication1
                         KeypointNum = kptnum
                     };
                     break;
-                case 2:
-                    th = int.Parse(CDFASTThreashold.Text);
-                    fast = imageData.MatImage.Clone();
-                    if (kptData.ContainsKey(CDFASTThreashold.Text) == false)
-                    {
-                        KNK.CDFAST(fast, out keypoints, th);
-                        kptData[CDFASTThreashold.Text] = keypoints;
-                    }
-                    else
-                    {
-                        keypoints = kptData[CDFASTThreashold.Text];
-                    }
-                    //keypoints = new KeyPoint[1]; keypoints[0] = new KeyPoint(1, 1, 1);
-                    kptnum = keypoints.Length;
-                    foreach (KeyPoint k in keypoints)
-                    {
-                        Cv2.Circle(fast, k.Pt, 1, new Scalar(0, 0, 255), -1);
-                        Cv2.Circle(fast, k.Pt, 5, new Scalar(0, 0, 255));
-                    }
-                    bitmapProcessed = WriteableBitmapConverter.ToWriteableBitmap(fast);
-                    bitmapImage = WriteableBitmapConverter.ToWriteableBitmap(imageData.resizeImage);
-
-                    DataContext = new
-                    {
-                        FileName = imageData.FileName,
-                        Image = bitmapImage,
-                        Edge = bitmapProcessed,
-                        Height = bitmapImage.Height,
-                        Width = bitmapImage.Width,
-                        KeypointNum = kptnum
-                    };
-                    break;
             }
-        }
-
-        public KeyPoint[] testFunc(Mat m)
-        {
-            List<KeyPoint> k = new List<KeyPoint>();
-            KeyPoint[] kk = new KeyPoint[100];
-            return kk;
         }
 
         private void comboBox_changed(object sender, RoutedEventArgs e)
@@ -192,7 +153,7 @@ namespace WpfApplication1
         }
 
         //CDFAST用の非同期ボタンメソッド
-        //引数取りたい
+        //引数取りたい ← とれた
         private async void CDFAST_submit_Click(object sender, RoutedEventArgs e)
         {
             KeyPoint[] keypoints;

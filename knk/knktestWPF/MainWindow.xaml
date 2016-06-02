@@ -25,11 +25,6 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Label Content="{Binding key1}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="0"/>
             <Label Content="{Binding th1}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="0"/>
@@ -41,17 +36,7 @@
             <Label Content="{Binding th4}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="3"/>
             <Label Content="{Binding key5}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="4"/>
             <Label Content="{Binding th5}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="4"/>
-            <Label Content="{Binding key6}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="5"/>
-            <Label Content="{Binding th6}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="5"/>
-            <Label Content="{Binding key7}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="6"/>
-            <Label Content="{Binding th7}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="6"/>
-            <Label Content="{Binding key8}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="7"/>
-            <Label Content="{Binding th8}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="7"/>
-            <Label Content="{Binding key9}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="8"/>
-            <Label Content="{Binding th9}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="8"/>
-            <Label Content="{Binding key10}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="9"/>
-            <Label Content="{Binding th10}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="9"/>
-            <Label Content="{Binding key11}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="10"/>
+            <Label Content="{Binding key6}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="10"/>
             <TextBox x:Name="threashold" Text="" Grid.Column="0" Grid.Row="11" Width="70" Height="30"/>
         </Grid>
     </Grid>

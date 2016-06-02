@@ -64,15 +64,16 @@ namespace knktestWPF
             }
 
             var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(m);
-            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap ,key11 = k.Length };
+            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap ,key6 = k.Length };
         }
 
         private void button2_click(object sender, RoutedEventArgs e)
         {
+            int num = 5;
             List<KeyPoint[]> keypoints = new List<KeyPoint[]>();
-            int[] th = new int[10];
+            int[] th = new int[num];
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < num; i++)
             {
                 th[i] = 100 * (i + 1);
                 keypoints.Add(KNK.CDFAST(img,th[i],false));
@@ -85,21 +86,11 @@ namespace knktestWPF
                 key3 = keypoints[2].Length,
                 key4 = keypoints[3].Length,
                 key5 = keypoints[4].Length,
-                key6 = keypoints[5].Length,
-                key7 = keypoints[6].Length,
-                key8 = keypoints[7].Length,
-                key9 = keypoints[8].Length,
-                key10 = keypoints[9].Length,
                 th1 = th[0],
                 th2 = th[1],
                 th3 = th[2],
                 th4 = th[3],
                 th5 = th[4],
-                th6 = th[5],
-                th7 = th[6],
-                th8 = th[7],
-                th9 = th[8],
-                th10 = th[9]
             };
         }
     }

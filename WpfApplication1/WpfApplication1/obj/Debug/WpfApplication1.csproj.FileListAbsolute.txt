@@ -338,3 +338,4 @@ C:\Users\daichiti\Source\Repos\test\WpfApplication1\WpfApplication1\obj\Debug\Wp
 C:\Users\daichiti\Source\Repos\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
 C:\Users\daichiti\Source\Repos\test\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
 C:\Users\daichiti\Source\Repos\test\WpfApplication1\WpfApplication1\bin\Debug\knk.dll
+C:\Users\daichiti\Source\Repos\test\WpfApplication1\WpfApplication1\bin\Debug\knk.pdb
