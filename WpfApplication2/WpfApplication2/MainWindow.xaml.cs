@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApplication2.ViewModels;
 
 namespace WpfApplication2
 {
@@ -20,9 +21,15 @@ namespace WpfApplication2
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		//window全体のViewModel君 いらない
+		//private MainWindowViewModel mainWindow;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			//↓いらない wpf側でWindowにDataContextするのが正解らしい
+			//mainWindow = new MainWindowViewModel();
 		}
 	}
 }

@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
+        xmlns:models="clr-namespace:WpfApplication2.Models"
+        xmlns:vm="clr-namespace:WpfApplication2.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="aaa" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" 
+                 HorizontalAlignment="Left" 
+                 Height="23" 
+                 Margin="10,31,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding testText, Mode=TwoWay}" 
+                 VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
