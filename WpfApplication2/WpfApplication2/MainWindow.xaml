@@ -8,19 +8,19 @@
         xmlns:vm="clr-namespace:WpfApplication2.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="{Binding WindowTitle}" MinHeight="430" MinWidth="508" Height="356.056" Width="427.155">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="aaa" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" 
-                 HorizontalAlignment="Left" 
-                 Height="23" 
-                 Margin="10,31,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="{Binding testText, Mode=TwoWay}" 
-                 VerticalAlignment="Top" Width="120"/>
+    <StackPanel x:Name="OverrallPanel" Orientation="Horizontal" MinHeight="400" MinWidth="500">
+        <StackPanel x:Name="FolderTreePanel" Height="400" Width="200">
+            <Border BorderBrush="Gray" BorderThickness="1" Width="200" Height="400">
+                
+            </Border>
+        </StackPanel>
+        <StackPanel x:Name="FileViewPanel" Height="400" Width="300">
 
-    </Grid>
+        </StackPanel>
+
+    </StackPanel>
 </Window>

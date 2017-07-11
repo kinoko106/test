@@ -8,5 +8,6 @@ namespace WpfApplication2.Models
 {
 	class WindowViewModelBase : ViewModelBase
 	{
+		//ウィンドウのViewModel用の記述ができるといいな
 	}
 }

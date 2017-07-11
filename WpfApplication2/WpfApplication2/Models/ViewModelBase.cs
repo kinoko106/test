@@ -10,7 +10,8 @@ namespace WpfApplication2.Models
 	/// <summary>
 	/// ViewModel基底クラス
 	/// </summary>
-	class ViewModelBase : NotificationObject
+	class ViewModelBase : ViewModel
 	{
+		//現状なんもおもいつかない
 	}
 }

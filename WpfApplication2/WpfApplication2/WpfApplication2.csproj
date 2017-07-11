@@ -77,6 +77,8 @@
     </ApplicationDefinition>
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Models\WindowViewModelBase.cs" />
+    <Compile Include="ViewModels\FileViewPanelViewModel.cs" />
+    <Compile Include="ViewModels\FolderTreePanelViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
