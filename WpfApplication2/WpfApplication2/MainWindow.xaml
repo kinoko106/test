@@ -12,27 +12,17 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <Style TargetType="WrapPanel">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-        </Style>
-    </Window.Resources>
-    <WrapPanel x:Name="OverrallPanel" Orientation="Horizontal" MinHeight="400" MinWidth="500">
-        <!-- ウィンドウ内全部のStackPanelに適用 別ファイルに分割する -->
-        <!--<StackPanel.Resources>
-
-        </StackPanel.Resources>-->
-        <WrapPanel x:Name="FolderTreePanel" MinHeight="400" MinWidth="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <WrapPanel x:Name="OverrallPanel" Orientation="Horizontal" MinWidth="500">
+        <WrapPanel x:Name="FolderTreePanel" MinWidth="200">
             <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!-- Width="200" Height="400"-->
-                <WrapPanel Orientation="Vertical" MinHeight="400" MinWidth="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <WrapPanel Orientation="Vertical" MinWidth="200" >
                     <WrapPanel x:Name="FolderAdditionPanel" MinHeight="30" MinWidth="200">
                         <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                         </Border>
                     </WrapPanel>
-                    <WrapPanel x:Name="FolderViewPanel">
+                    <WrapPanel x:Name="FolderViewPanel" MinHeight="370">
                         <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
                     </WrapPanel>
                 </WrapPanel>
