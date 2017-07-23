@@ -8,19 +8,38 @@
         xmlns:vm="clr-namespace:WpfApplication2.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
-        Title="{Binding WindowTitle}" MinHeight="430" MinWidth="508" Height="356.056" Width="427.155">
+        Title="{Binding WindowTitle}" MinHeight="430" MinWidth="508" Width="510" Height="430">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <StackPanel x:Name="OverrallPanel" Orientation="Horizontal" MinHeight="400" MinWidth="500">
-        <StackPanel x:Name="FolderTreePanel" Height="400" Width="200">
-            <Border BorderBrush="Gray" BorderThickness="1" Width="200" Height="400">
-                
+    <Window.Resources>
+        <Style TargetType="WrapPanel">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+    <WrapPanel x:Name="OverrallPanel" Orientation="Horizontal" MinHeight="400" MinWidth="500">
+        <!-- ウィンドウ内全部のStackPanelに適用 別ファイルに分割する -->
+        <!--<StackPanel.Resources>
+
+        </StackPanel.Resources>-->
+        <WrapPanel x:Name="FolderTreePanel" MinHeight="400" MinWidth="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!-- Width="200" Height="400"-->
+                <WrapPanel Orientation="Vertical" MinHeight="400" MinWidth="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <WrapPanel x:Name="FolderAdditionPanel" MinHeight="30" MinWidth="200">
+                        <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                        </Border>
+                    </WrapPanel>
+                    <WrapPanel x:Name="FolderViewPanel">
+                        <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+                    </WrapPanel>
+                </WrapPanel>
             </Border>
+        </WrapPanel>
+        <StackPanel x:Name="FileViewPanel" MinHeight="400" MinWidth="300">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock"/>
         </StackPanel>
-        <StackPanel x:Name="FileViewPanel" Height="400" Width="300">
-
-        </StackPanel>
-
-    </StackPanel>
+    </WrapPanel>
 </Window>
