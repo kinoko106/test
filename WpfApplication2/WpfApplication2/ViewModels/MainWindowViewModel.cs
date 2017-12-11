@@ -67,8 +67,6 @@ namespace WpfApplication2.ViewModels
 		public MainWindowViewModel()
 		{
 			//Windowの要素初期化
-			Height = 230;
-			Width = 305;
 			WindowTitle = "ファイル交換君";
 			//windowスタイルや各コントロールの挙動もどこかで初期化したい,xamlに直書きでよいのか
 
