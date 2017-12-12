@@ -7,6 +7,7 @@
         xmlns:models="clr-namespace:YourSecretary.ViewModel"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
+        xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True" 
@@ -25,15 +26,7 @@
 
         <Image x:Name="obj" Source="{Binding ImagePath}" 
                Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
-               MouseUp="{Binding  Path=SayClickVoice}">
-            <!--
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=SayClickVoice,ElementName=YourSecretary}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            -->
+               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}">
         </Image>
         <!--
         <Button Command="{Binding Path=SayClickVoice}"  Background="Transparent"
