@@ -30,6 +30,7 @@ namespace syokakuWindow
 			this.MouseLeftButtonDown += (sender, e) => { this.DragMove(); };
 
 			string path = @"C:\Users\daichi\Source\Repos\test\syokakuWindow\syokakuWindow\Material\santa_syokaku.png";
+			//string path = @"C:\Users\daichi\Source\Repos\test\syokakuWindow\syokakuWindow\Material\santa_syokaku_600.png";
 			mainObject = new ImageObject(path);
 
 			this.DataContext = new

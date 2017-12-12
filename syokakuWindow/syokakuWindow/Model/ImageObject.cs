@@ -36,7 +36,7 @@ namespace syokakuWindow.Model
 			Image = new BitmapImage();
 			Image.BeginInit();
 			Image.UriSource = new Uri(path);
-			Image.DecodePixelHeight = 800;
+			Image.DecodePixelHeight = 600;
 			Image.EndInit();
 
 			_width = (int)Image.Width;
