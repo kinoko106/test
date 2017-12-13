@@ -1,5 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:resource="clr-namespace:syokakuWindow.Resource">
-    <Image x:Key="ImageSource1" x:Name="ImageSource1" Source="C:\Users\daichi\Source\Repos\test\syokakuWindow\syokakuWindow\Material\folder.png"/>
-</ResourceDictionary>
