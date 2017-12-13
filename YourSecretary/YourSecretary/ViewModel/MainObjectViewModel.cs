@@ -22,6 +22,7 @@ namespace YourSecretary.ViewModel
 			ImagePath = mainObject.ImagePath;
 		}
 
+		#region ClickvoiceCommand
 		private ViewModelCommand _SayClickVoice = null;
 
 		public ViewModelCommand SayClickVoice
@@ -30,14 +31,14 @@ namespace YourSecretary.ViewModel
 			{
 				if (_SayClickVoice == null)
 				{
-					//_SayClickVoice = new ViewModelCommand(doMesod);
 					_SayClickVoice = new ViewModelCommand(mainObject.SayClickVoice);
 				}
 				return _SayClickVoice;
 			}
 		}
+		#endregion
 
-
+		#region width
 		private int _WindowWidth;
 
 		public int WindowWidth
@@ -52,7 +53,9 @@ namespace YourSecretary.ViewModel
 				RaisePropertyChanged(nameof(WindowWidth));
 			}
 		}
+		#endregion
 
+		#region height
 		private int _WindowHeight;
 
 		public int WindowHeight
@@ -67,7 +70,9 @@ namespace YourSecretary.ViewModel
 				RaisePropertyChanged(nameof(WindowHeight));
 			}
 		}
+		#endregion
 
+		#region imagepath
 		private string _ImagePath;
 
 		public string ImagePath
@@ -82,5 +87,6 @@ namespace YourSecretary.ViewModel
 				RaisePropertyChanged(nameof(ImagePath));
 			}
 		}
+		#endregion
 	}
 }

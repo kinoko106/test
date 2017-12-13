@@ -14,6 +14,8 @@ namespace YourSecretary.Model
 		private const string voiceDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\Voice\";
 		private List<SoundPlayer> clickVoice = new List<SoundPlayer>();
 
+		private bool canPlay = true;
+
 		public SayVoiceObjectModel()
 		{
 			string[] files = Directory.GetFiles(voiceDirectry, "*", SearchOption.TopDirectoryOnly);
@@ -22,11 +24,16 @@ namespace YourSecretary.Model
 			{
 				clickVoice.Add(new SoundPlayer(file));
 			}
+
+			canPlay = true;
 		}
 
 		public void PlayClickVoice()
 		{
-			clickVoice[0].Play();
+			if (canPlay)
+			{
+				clickVoice[0].Play();
+			}
 		}
 
 		public void PlayClickVoice(int num)

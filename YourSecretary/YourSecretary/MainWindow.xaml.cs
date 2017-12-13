@@ -21,14 +21,12 @@ namespace YourSecretary
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		//MainObjectModel mainObject;
-
 		public MainWindow()
 		{
 			this.MouseLeftButtonDown += (sender, e) => { this.DragMove(); };
-
+			
 			this.Loaded += (sender, e) =>
-			{
+			{	
 				//mainObject = new MainObjectModel();
 
 				//this.DataContext = new

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YourSecretary"
         xmlns:models="clr-namespace:YourSecretary.ViewModel"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
         xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         mc:Ignorable="d"
@@ -15,27 +15,38 @@
         Topmost="True"
         x:Name="YourSecretary"
         Title="YourSecretary" 
-        Height="{Binding WindowHeight}" 
-        Width="{Binding WindowWidth}">
-
+        Height="{Binding WindowHeight,Mode=TwoWay}" 
+        Width="{Binding WindowWidth,Mode=TwoWay}">
     <Window.DataContext x:Uid="YourSecretary">
         <models:MainObjectViewModel/>
     </Window.DataContext>
 
-    <StackPanel Orientation="Vertical">
-
-        <Image x:Name="obj" Source="{Binding ImagePath}" 
+    <StackPanel x:Name="Pannel1" Orientation="Vertical" 
+                Height="{Binding WindowHeight,Mode=TwoWay}" 
+                Width="{Binding WindowWidth,Mode=TwoWay}"
+                >
+        <Interactivity:Interaction.Triggers>
+            <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
+                <Interactivity:InvokeCommandAction Command="{Binding SayClickVoice}"/>
+            </Interactivity:EventTrigger>
+        </Interactivity:Interaction.Triggers>
+        
+        <Image x:Name="mainobj" Source="{Binding ImagePath}" 
                Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}">
-        </Image>
+               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"/>
+
         <!--
-        <Button Command="{Binding Path=SayClickVoice}"  Background="Transparent"
+        <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 
                 Width="{Binding WindowWidth}" 
                Height="{Binding WindowHeight}">
-            <Image Source="{Binding ImagePath}" 
-               Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" >
-            </Image>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Source="{Binding ImagePath}" 
+                       Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                       Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" >
+                    </Image>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
         -->
     </StackPanel>

@@ -13,6 +13,7 @@ namespace YourSecretary.Model
 		const string ImagePath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
 		private Uri current;
 		private BitmapImage Image = null;
+		//private ClickableImage Image = null;
 
 		private int _width;
 		private int _height;
@@ -32,6 +33,7 @@ namespace YourSecretary.Model
 			current = new Uri(System.IO.Directory.GetCurrentDirectory());
 
 			Image = new BitmapImage();
+			//Image = new ClickableImage();
 
 			Image.BeginInit();
 			Image.UriSource = new Uri(ImagePath);
