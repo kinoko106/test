@@ -14,6 +14,9 @@ namespace YourSecretary.Model
 		private const int Timers = 24;
 		private List<SoundPlayer> timerSignals = new List<SoundPlayer>();
 
+		private List<string> filePathes = new List<string>();
+		private SoundPlayer player = null;
+
 		DispatcherTimer timer = null;
 		bool doPlayFlg;
 
@@ -23,14 +26,16 @@ namespace YourSecretary.Model
 		public TimerSignalObjectModel()
 		{
 			string[] files = Directory.GetFiles(timerDirectry, "*", SearchOption.TopDirectoryOnly);
-			int fileCount = files.Length;
+			filePathes.AddRange(files);
 
-			int counter = fileCount < Timers ? fileCount : Timers;
-			for(int i = 0;i < counter; i++)
-			{
-				//string filename = files[i].Substring(timerDirectry.Length);
-				timerSignals.Add(new SoundPlayer(files[i]));
-			}
+			//int fileCount = files.Length;
+
+			//int counter = fileCount < Timers ? fileCount : Timers;
+			//for(int i = 0;i < counter; i++)
+			//{
+			//	//string filename = files[i].Substring(timerDirectry.Length);
+			//	timerSignals.Add(new SoundPlayer(files[i]));
+			//}
 
 			timer = new DispatcherTimer();
 			timer.Interval = new TimeSpan(0, 0, 1);
@@ -42,7 +47,8 @@ namespace YourSecretary.Model
 
 		public void PlayTimerSignal(int num)
 		{
-			timerSignals[num].Play();
+			player = !string.IsNullOrEmpty(filePathes[num]) ? new SoundPlayer(filePathes[num]) : null;
+			player?.Play();
 		}
 
 		private void dispatcherTimer_Tick(object sender, EventArgs e)

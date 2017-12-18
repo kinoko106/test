@@ -16,7 +16,10 @@
         x:Name="YourSecretary"
         Title="YourSecretary" 
         Height="{Binding WindowHeight,Mode=TwoWay}" 
-        Width="{Binding WindowWidth,Mode=TwoWay}">
+        Width="{Binding WindowWidth,Mode=TwoWay}"
+        Top="{Binding WindowTop,Mode=TwoWay}"
+        Left="{Binding WindowLeft,Mode=TwoWay}"
+        >
     <Window.DataContext x:Uid="YourSecretary">
         <models:MainObjectViewModel/>
     </Window.DataContext>
@@ -29,11 +32,16 @@
             <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
                 <Interactivity:InvokeCommandAction Command="{Binding SayClickVoice}"/>
             </Interactivity:EventTrigger>
+            <Interactivity:EventTrigger EventName="MouseLeftButtonDown">
+                <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonDown}"/>
+            </Interactivity:EventTrigger>
         </Interactivity:Interaction.Triggers>
-        
+
         <Image x:Name="mainobj" Source="{Binding ImagePath}" 
                Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"/>
+               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" OpacityMask="{Binding Mask,Mode=TwoWay}" 
+               >
+        </Image>
 
         <!--
         <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 

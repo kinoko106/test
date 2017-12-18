@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using YourSecretary.Model;
 using Livet.Commands;
+using System.Windows;
+using System.Drawing;
 
 namespace YourSecretary.ViewModel
 {
@@ -20,8 +22,10 @@ namespace YourSecretary.ViewModel
 			WindowWidth = mainObject.Width;
 			WindowHeight = mainObject.Height;
 			ImagePath = mainObject.ImagePath;
-		}
 
+			//WindowTop = 100;
+		}
+		
 		#region ClickvoiceCommand
 		private ViewModelCommand _SayClickVoice = null;
 
@@ -31,9 +35,42 @@ namespace YourSecretary.ViewModel
 			{
 				if (_SayClickVoice == null)
 				{
-					_SayClickVoice = new ViewModelCommand(mainObject.SayClickVoice);
+					//_SayClickVoice = new ViewModelCommand(mainObject.MouseMoveEnd);
+					_SayClickVoice = new ViewModelCommand(LeftButtonUp);
 				}
 				return _SayClickVoice;
+			}
+		}
+		#endregion
+
+		#region MouseLeftButtonDown
+		private ViewModelCommand _MouseLeftButtonDown = null;
+
+		public ViewModelCommand MouseLeftButtonDown
+		{
+			get
+			{
+				if (_MouseLeftButtonDown == null)
+				{
+					_MouseLeftButtonDown = new ViewModelCommand(LeftButtonDown);
+				}
+				return _MouseLeftButtonDown;
+			}
+		}
+		#endregion
+
+		#region SwitchClickableCommand
+		private ViewModelCommand _SwitchClickable = null;
+
+		public ViewModelCommand SwitchClickable
+		{
+			get
+			{
+				if (_SwitchClickable == null)
+				{
+					_SwitchClickable = new ViewModelCommand(UpdateMask);
+				}
+				return _SwitchClickable;
 			}
 		}
 		#endregion
@@ -72,6 +109,40 @@ namespace YourSecretary.ViewModel
 		}
 		#endregion
 
+		#region top
+		private int _WindowTop;
+
+		public int WindowTop
+		{
+			get
+			{ return _WindowTop; }
+			set
+			{
+				if (_WindowTop == value)
+					return;
+				_WindowTop = value;
+				RaisePropertyChanged(nameof(WindowTop));
+			}
+		}
+		#endregion
+
+		#region left
+		private int _WindowLeft;
+
+		public int WindowLeft
+		{
+			get
+			{ return _WindowLeft; }
+			set
+			{
+				if (_WindowLeft == value)
+					return;
+				_WindowLeft = value;
+				RaisePropertyChanged(nameof(WindowLeft));
+			}
+		}
+		#endregion
+
 		#region imagepath
 		private string _ImagePath;
 
@@ -88,5 +159,43 @@ namespace YourSecretary.ViewModel
 			}
 		}
 		#endregion
+
+		#region Mask
+		public string Mask
+		{
+			get { return mainObject.Mask; }
+			set
+			{
+				if (mainObject.Mask == value)
+					return;
+				mainObject.Mask = value;
+				RaisePropertyChanged("Mask");
+			}
+		}
+		#endregion
+
+		public void UpdateMask()
+		{
+			Mask = mainObject.Mask;
+		}
+
+
+		private int startX;
+		private int startY;
+		private int endX,endY;
+		public void LeftButtonDown()
+		{
+			startY = WindowTop;
+			startX = WindowLeft;
+		}
+
+		public void LeftButtonUp()
+		{
+			endY = WindowTop;
+			endX = WindowLeft;
+
+			if (startY == endY && startX == endX)
+				mainObject.SayClickVoice();
+		}
 	}
 }

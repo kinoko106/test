@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Livet;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace YourSecretary.Model
 {
@@ -36,10 +38,30 @@ namespace YourSecretary.Model
 			get { return mainImage.FilePath; }
 		}
 
+		public string Mask
+		{
+			get { return mainImage.Mask; }
+			set { mainImage.Mask = value; }
+		}
+
+		public void MouseMoveStart()
+		{
+		}
+
+		public void MouseMoveEnd()
+		{
+
+			voice.PlayClickVoice();
+		}
+
 		public void SayClickVoice()
 		{
 			voice.PlayClickVoice();
+		}
 
+		public void SwitchClickable()
+		{
+			mainImage.Mask = "";
 		}
 	}
 }

@@ -10,35 +10,47 @@ namespace YourSecretary.Model
 {
 	class SayVoiceObjectModel
 	{
-		//private const string voiceDirectry = @".\Resource\Sound\Voice\";
-		private const string voiceDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\Voice\";
-		private List<SoundPlayer> clickVoice = new List<SoundPlayer>();
+		private const string voiceDirectry = @".\Resource\Sound\Voice\";
+		//private const string voiceDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\Voice\";
+		private List<string> clickVoices = new List<string>();
+		private SoundPlayer player = null;
 
-		private bool canPlay = true;
+		private bool _CanPlay = true;
 
 		public SayVoiceObjectModel()
 		{
-			string[] files = Directory.GetFiles(voiceDirectry, "*", SearchOption.TopDirectoryOnly);
+			_CanPlay = true;
+		}
 
-			foreach(string file in files)
-			{
-				clickVoice.Add(new SoundPlayer(file));
-			}
-
-			canPlay = true;
+		public bool CanPlay
+		{
+			get { return this._CanPlay; }
+			set { this._CanPlay = value; }
 		}
 
 		public void PlayClickVoice()
 		{
-			if (canPlay)
-			{
-				clickVoice[0].Play();
-			}
+			if (!CanPlay)
+				return;
+
+			clickVoices.Clear();
+			string[] files = Directory.GetFiles(voiceDirectry, "*", SearchOption.TopDirectoryOnly);
+			clickVoices.AddRange(files);
+
+			if (clickVoices.Count() == 0) return;
+
+			player = !string.IsNullOrEmpty(clickVoices[0]) ? new SoundPlayer(clickVoices[0]) : null;
+			player?.Play();
 		}
 
 		public void PlayClickVoice(int num)
 		{
-			clickVoice[num].Play();
+			clickVoices.Clear();
+			string[] files = Directory.GetFiles(voiceDirectry, "*", SearchOption.TopDirectoryOnly);
+			clickVoices.AddRange(files);
+
+			player = !string.IsNullOrEmpty(clickVoices[0]) ? new SoundPlayer(clickVoices[0]) : null;
+			player?.Play();
 		}
 	}
 }
