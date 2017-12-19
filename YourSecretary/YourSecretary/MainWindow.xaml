@@ -19,6 +19,7 @@
         Width="{Binding WindowWidth,Mode=TwoWay}"
         Top="{Binding WindowTop,Mode=TwoWay}"
         Left="{Binding WindowLeft,Mode=TwoWay}"
+        InputMethod.IsInputMethodEnabled="False"
         >
     <Window.DataContext x:Uid="YourSecretary">
         <models:MainObjectViewModel/>
