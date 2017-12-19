@@ -10,39 +10,41 @@ namespace YourSecretary.Model
 {
 	class ImageObjectModel 
 	{
-		const string ImagePath = @".\Resource\Image\santa_syokaku_600.png";
-		//const string ImagePath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
+		//const string ImagePath = @".\Resource\Image\santa_syokaku_600.png";
+		const string ImagePath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
 		private Uri current;
 		private BitmapImage Image = null;
 
 		private int _width;
 		private int _height;
 		private string _filepath;
-		private string _mask;
+		private double _mask;
 
 		public ImageObjectModel()
 		{
-			current = new Uri(System.IO.Directory.GetCurrentDirectory());
-
-			Image = new BitmapImage();
-
-			Image.BeginInit();
-			Image.UriSource = new Uri(current, ImagePath);
-			Image.DecodePixelHeight = 600;
-			Image?.EndInit();
-
 			//current = new Uri(System.IO.Directory.GetCurrentDirectory());
 
 			//Image = new BitmapImage();
 
 			//Image.BeginInit();
-			//Image.UriSource = new Uri(ImagePath);
+			//Image.UriSource = new Uri(current, ImagePath);
 			//Image.DecodePixelHeight = 600;
 			//Image?.EndInit();
+
+			current = new Uri(System.IO.Directory.GetCurrentDirectory());
+
+			Image = new BitmapImage();
+
+			Image.BeginInit();
+			Image.UriSource = new Uri(ImagePath);
+			Image.DecodePixelHeight = 600;
+			Image?.EndInit();
 
 			_width = (int)Image?.PixelWidth;
 			_height = (int)Image?.PixelHeight;
 			_filepath = Image?.UriSource.ToString();
+
+			_mask = 1;
 		}
 
 		public int Width
@@ -63,7 +65,7 @@ namespace YourSecretary.Model
 			private set { _filepath = value; }
 		}
 
-		public string Mask
+		public double Mask
 		{
 			get { return _mask; }
 			set { _mask = value; }

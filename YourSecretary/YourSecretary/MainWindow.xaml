@@ -31,16 +31,20 @@
                 >
         <Interactivity:Interaction.Triggers>
             <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
-                <Interactivity:InvokeCommandAction Command="{Binding SayClickVoice}"/>
+                <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
             </Interactivity:EventTrigger>
             <Interactivity:EventTrigger EventName="MouseLeftButtonDown">
                 <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonDown}"/>
+            </Interactivity:EventTrigger>
+            <Interactivity:EventTrigger EventName="MouseRightButtonDown">
+                <Interactivity:InvokeCommandAction Command="{Binding MouseRightButtonDown}"/>
             </Interactivity:EventTrigger>
         </Interactivity:Interaction.Triggers>
 
         <Image x:Name="mainobj" Source="{Binding ImagePath}" 
                Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" OpacityMask="{Binding Mask,Mode=TwoWay}" 
+               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" 
+               Opacity="{Binding Mask,Mode=TwoWay}" 
                >
         </Image>
 

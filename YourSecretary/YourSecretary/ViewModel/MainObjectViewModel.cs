@@ -22,23 +22,21 @@ namespace YourSecretary.ViewModel
 			WindowWidth = mainObject.Width;
 			WindowHeight = mainObject.Height;
 			ImagePath = mainObject.ImagePath;
-
-			//WindowTop = 100;
+			Mask = 1;
 		}
-		
-		#region ClickvoiceCommand
-		private ViewModelCommand _SayClickVoice = null;
 
-		public ViewModelCommand SayClickVoice
+		#region MouseLeftButtonUpCommand
+		private ViewModelCommand _MouseLeftButtonUp = null;
+
+		public ViewModelCommand MouseLeftButtonUp
 		{
 			get
 			{
-				if (_SayClickVoice == null)
+				if (_MouseLeftButtonUp == null)
 				{
-					//_SayClickVoice = new ViewModelCommand(mainObject.MouseMoveEnd);
-					_SayClickVoice = new ViewModelCommand(LeftButtonUp);
+					_MouseLeftButtonUp = new ViewModelCommand(LeftButtonUp);
 				}
-				return _SayClickVoice;
+				return _MouseLeftButtonUp;
 			}
 		}
 		#endregion
@@ -59,18 +57,18 @@ namespace YourSecretary.ViewModel
 		}
 		#endregion
 
-		#region SwitchClickableCommand
-		private ViewModelCommand _SwitchClickable = null;
+		#region MouseRightButtonDown
+		private ViewModelCommand _MouseRightButtonDown = null;
 
-		public ViewModelCommand SwitchClickable
+		public ViewModelCommand MouseRightButtonDown
 		{
 			get
 			{
-				if (_SwitchClickable == null)
+				if (_MouseRightButtonDown == null)
 				{
-					_SwitchClickable = new ViewModelCommand(UpdateMask);
+					_MouseRightButtonDown = new ViewModelCommand(UpdateMask);
 				}
-				return _SwitchClickable;
+				return _MouseRightButtonDown;
 			}
 		}
 		#endregion
@@ -161,22 +159,24 @@ namespace YourSecretary.ViewModel
 		#endregion
 
 		#region Mask
-		public string Mask
+		public double _Mask;
+		public double Mask
 		{
-			get { return mainObject.Mask; }
+			get { return _Mask; }
 			set
 			{
-				if (mainObject.Mask == value)
+				if (_Mask == value)
 					return;
-				mainObject.Mask = value;
-				RaisePropertyChanged("Mask");
+				_Mask = value;
+				RaisePropertyChanged(nameof(Mask));
 			}
 		}
 		#endregion
 
 		public void UpdateMask()
 		{
-			Mask = mainObject.Mask;
+			Mask = mainObject.ToggleTransparent();
+			mainObject.ToggleSayVoiceState();
 		}
 
 

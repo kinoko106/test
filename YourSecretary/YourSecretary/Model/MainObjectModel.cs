@@ -38,30 +38,26 @@ namespace YourSecretary.Model
 			get { return mainImage.FilePath; }
 		}
 
-		public string Mask
+		public double Mask
 		{
 			get { return mainImage.Mask; }
 			set { mainImage.Mask = value; }
 		}
 
-		public void MouseMoveStart()
+		public void ToggleSayVoiceState()
 		{
+			voice.CanPlay = voice.CanPlay ? false : true;
 		}
 
-		public void MouseMoveEnd()
+		public double ToggleTransparent()
 		{
-
-			voice.PlayClickVoice();
+			Mask = (Mask == 1.0) ? 0.7 : 1.0;
+			return Mask;
 		}
 
 		public void SayClickVoice()
 		{
 			voice.PlayClickVoice();
-		}
-
-		public void SwitchClickable()
-		{
-			mainImage.Mask = "";
 		}
 	}
 }
