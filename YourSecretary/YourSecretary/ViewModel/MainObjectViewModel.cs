@@ -20,7 +20,7 @@ namespace YourSecretary.ViewModel
 			mainObject= new MainObjectModel();
 
 			WindowWidth = mainObject.Width;
-			WindowHeight = mainObject.Height;
+			WindowHeight = mainObject.Height + 50;
 			ImagePath = mainObject.ImagePath;
 			Mask = 1;
 		}

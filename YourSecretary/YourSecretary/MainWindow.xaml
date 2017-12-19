@@ -15,8 +15,8 @@
         Topmost="True"
         x:Name="YourSecretary"
         Title="YourSecretary" 
-        Height="{Binding WindowHeight,Mode=TwoWay}" 
-        Width="{Binding WindowWidth,Mode=TwoWay}"
+        Height="{Binding WindowHeight,Mode=OneWay}" 
+        Width="{Binding WindowWidth,Mode=OneWay}"
         Top="{Binding WindowTop,Mode=TwoWay}"
         Left="{Binding WindowLeft,Mode=TwoWay}"
         InputMethod.IsInputMethodEnabled="False"
@@ -26,8 +26,8 @@
     </Window.DataContext>
 
     <StackPanel x:Name="Pannel1" Orientation="Vertical" 
-                Height="{Binding WindowHeight,Mode=TwoWay}" 
-                Width="{Binding WindowWidth,Mode=TwoWay}"
+                Height="{Binding WindowHeight,Mode=OneWay}" 
+                Width="{Binding WindowWidth,Mode=OneWay}"
                 >
         <Interactivity:Interaction.Triggers>
             <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
@@ -44,10 +44,8 @@
         <Image x:Name="mainobj" Source="{Binding ImagePath}" 
                Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
                Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" 
-               Opacity="{Binding Mask,Mode=TwoWay}" 
-               >
+               Opacity="{Binding Mask,Mode=TwoWay}">
         </Image>
-
         <!--
         <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 
                 Width="{Binding WindowWidth}" 
