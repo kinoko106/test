@@ -5,39 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:knktestWPF"
         mc:Ignorable="d"
-        Title="MainWindow" MaxHeight="580" MaxWidth="600">
-    <Grid>
-        <Grid Width="300" Height="580" HorizontalAlignment="Left">
-            <Image x:Name="image" HorizontalAlignment="Left" MaxHeight="{Binding Height}"  MaxWidth="{Binding Width}" Margin="0,0,0,0" VerticalAlignment="Top" Source="{Binding IMAGE}"/>
-            <Button x:Name="button1" Content="Button1" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top" Width="75" Click="button1_click"/>
-            <Button x:Name="button2" Content="Button2" HorizontalAlignment="Left" Margin="100,480,0,0" VerticalAlignment="Top" Width="75" Click="button2_click"/>
-        </Grid>
-        <Grid HorizontalAlignment="Right" Width="300" Height="400" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-            <Label Content="{Binding key1}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="0"/>
-            <Label Content="{Binding th1}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="0"/>
-            <Label Content="{Binding key2}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="1"/>
-            <Label Content="{Binding th2}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="1"/>
-            <Label Content="{Binding key3}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="2"/>
-            <Label Content="{Binding th3}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="2"/>
-            <Label Content="{Binding key4}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="3"/>
-            <Label Content="{Binding th4}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="3"/>
-            <Label Content="{Binding key5}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="4"/>
-            <Label Content="{Binding th5}" Height="30" Width=" 70" Grid.Column="0" Grid.Row="4"/>
-            <Label Content="{Binding key6}" Height="30" Width=" 70" Grid.Column="1" Grid.Row="10"/>
-            <TextBox x:Name="threashold" Text="" Grid.Column="0" Grid.Row="11" Width="70" Height="30"/>
-        </Grid>
+        Title="MainWindow" MaxHeight="580" MaxWidth="600" Width="{Binding MainWidth}" Height="{Binding MainHeight}">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <!-- stackpanelにぶち込む -->
+        <Button x:Name="button1"
+                Content="Button"
+                HorizontalAlignment="Left"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Width="75" Click="button1_click"/>
+
+        <TextBlock x:Name="title"
+                   HorizontalAlignment="Left"
+                   Margin="391,12,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="TextBlock"
+                   VerticalAlignment="Top"/>
+        <ListBox x:Name="ProcessList" 
+                 HorizontalAlignment="Left" 
+                 Height="100" 
+                 Margin="95,0,0,0" 
+                 VerticalAlignment="Top"
+                 Width="100"
+                 SelectionChanged="ProcessList_changed"/>
+
     </Grid>
 </Window>

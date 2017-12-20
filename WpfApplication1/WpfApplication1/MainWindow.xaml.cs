@@ -27,7 +27,6 @@ namespace WpfApplication1
     public partial class MainWindow : System.Windows.Window
     {
         ImageData imageData;
-
         Dictionary<string, KeyPoint[]> kptData = new Dictionary<string, KeyPoint[]>();
 
         public MainWindow()
@@ -71,6 +70,7 @@ namespace WpfApplication1
             {
                 case 0://edge
                     int th1, th2;
+                    //TODO canny閾値のエラーチェック
                     th1 = int.Parse(CannyThreshold1.Text);
                     th2 = int.Parse(CannyThreshold2.Text);
 
@@ -91,6 +91,7 @@ namespace WpfApplication1
                 case 1:
                     int th, kptnum;
                     KeyPoint[] keypoints;
+                    //TODO fast閾値のエラーチェック
                     th = int.Parse(FASTThreashold.Text);
 
                     gray = new Mat(Cv.Size(imageData.Width, imageData.Height), MatType.CV_8UC1);
@@ -158,13 +159,24 @@ namespace WpfApplication1
         {
             KeyPoint[] keypoints;
             Mat cdfast = imageData.MatImage.Clone();
+
+            //TODO CDFAST閾値エラーチェック
             int threashold = int.Parse(CDFASTThreashold.Text);
 
-            Load.IsEnabled = false;
-            process_comboBox.IsEnabled = false;
-            keypoints = await Task.Run(() => KNK.CDFAST(cdfast, 100));
-            Load.IsEnabled = true;
-            process_comboBox.IsEnabled = true;
+            if (kptData.ContainsKey(CDFASTThreashold.Text) == true)
+            {
+                keypoints = kptData[CDFASTThreashold.Text];
+            }
+            else
+            {
+                Load.IsEnabled = false;
+                process_comboBox.IsEnabled = false;
+                //非同期 CDFASTの返り値がkptdataに代入されている
+                kptData[CDFASTThreashold.Text] = await Task.Run(() => { return KNK.CDFAST(cdfast, threashold); });
+                keypoints = kptData[CDFASTThreashold.Text];
+                Load.IsEnabled = true;
+                process_comboBox.IsEnabled = true;
+            }
 
             var kptnum = keypoints.Length;
             foreach (KeyPoint k in keypoints)

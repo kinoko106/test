@@ -21,6 +21,7 @@ namespace knk
 			startCounter = 0;
 			QueryPerformanceCounter(ref startCounter);
 		}
+
 		public static void End()
 		{
 			long stopCounter = 0;

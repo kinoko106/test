@@ -12,10 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 using OpenCvSharp.Extensions;
 using OpenCvSharp.CPlusPlus;
 using System.Threading;
 using knk;
+using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace knktestWPF
 {
@@ -25,73 +29,121 @@ namespace knktestWPF
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-
-        KeyPoint[] k;
-        Mat img;
+        List<String> winTitles = new List<string>();
+        List<IntPtr> winHandles = new List<IntPtr>();
         public MainWindow()
         {
             InitializeComponent();
-
-            try
-            {
-                img = Cv2.ImRead("shokaku.jpg");
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            double w = Width;
-            double h = Height;
-            var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(img);
-            DataContext = new { Height = h, Width = w ,IMAGE = wbitmap};
         }
 
-        private async void button1_click(object sender, RoutedEventArgs e)
+        private void button1_click(object sender, RoutedEventArgs e)
         {
-            //過去の遺産
-            //Task<KeyPoint[]> task = Task.Run(() => KNK.CDFAST(img, 100));
-            //k = await Task.Run(() => KNK.CDFASTAsync(img, 100));
-            //k = task.Result;
+            var process = Process.GetCurrentProcess();
 
-            int th = int.Parse(threashold.Text);
-            Mat m = img.Clone();
-            k = await Task.Run(() => KNK.CDFAST(m, th));
-
-            foreach (KeyPoint key in k)
+            int maxlength = 0;
+            int num = 0;
+            var processes = Process.GetProcesses();
+            foreach (Process p in processes)
             {
-                Cv2.Circle(m, key.Pt, 3, new Scalar(255, 0, 0));
+                if (p.MainWindowTitle.Length > 1)
+                {
+                    ProcessList.Items.Add(p.ProcessName);
+                    winTitles.Add(p.MainWindowTitle);
+                    winHandles.Add(p.MainWindowHandle);
+                    if (p.ProcessName.Length > maxlength)
+                    {
+                        maxlength = p.ProcessName.Length;
+                    }
+                    num++;
+                }
             }
 
-            var wbitmap = WriteableBitmapConverter.ToWriteableBitmap(m);
-            DataContext = new { Height = this.Height, Width = this.Height, IMAGE = wbitmap ,key6 = k.Length };
+            ProcessList.Width = maxlength * 9;
+            ProcessList.Height = (ProcessList.FontSize * 2) * num;
+            Width += (ProcessList.FontSize * 2) * num;
+
+
+            Bitmap bmp = new Bitmap(480,600, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            using(Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CopyFromScreen(480, 600, 0, 0, new System.Drawing.Size(480, 600), CopyPixelOperation.SourceCopy);
+            }
+
+            bmp.Save("capture.png", ImageFormat.Png);
         }
 
-        private void button2_click(object sender, RoutedEventArgs e)
+        private void ProcessList_changed(object sender, SelectionChangedEventArgs e)
         {
-            int num = 5;
-            List<KeyPoint[]> keypoints = new List<KeyPoint[]>();
-            int[] th = new int[num];
-
-            for (int i = 0; i < num; i++)
-            {
-                th[i] = 100 * (i + 1);
-                keypoints.Add(KNK.CDFAST(img,th[i],false));
-            }
-
-            DataContext = new
-            {
-                key1 = keypoints[0].Length,
-                key2 = keypoints[1].Length,
-                key3 = keypoints[2].Length,
-                key4 = keypoints[3].Length,
-                key5 = keypoints[4].Length,
-                th1 = th[0],
-                th2 = th[1],
-                th3 = th[2],
-                th4 = th[3],
-                th5 = th[4],
-            };
+            title.Text = winTitles[ProcessList.SelectedIndex];
         }
     }
+    #region 拾い物
+    public class Win32APICall
+    {
+        [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
+        public static extern IntPtr DeleteDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        public static extern IntPtr DeleteObject(IntPtr hObject);
+
+        [DllImport("gdi32.dll", EntryPoint = "BitBlt")]
+        public static extern bool BitBlt(IntPtr hdcDest, int nXDest,
+            int nYDest, int nWidth, int nHeight, IntPtr hdcSrc,
+            int nXSrc, int nYSrc, int dwRop);
+
+        [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleBitmap")]
+        public static extern IntPtr CreateCompatibleBitmap(IntPtr hdc,
+            int nWidth, int nHeight);
+
+        [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleDC")]
+        public static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll", EntryPoint = "SelectObject")]
+        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobjBmp);
+
+        [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
+        public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll", EntryPoint = "GetDC")]
+        public static extern IntPtr GetDC(IntPtr hWnd);
+
+        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
+        public static extern int GetSystemMetrics(int nIndex);
+
+        [DllImport("user32.dll", EntryPoint = "ReleaseDC")]
+        public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+        public static Bitmap GetDesktop()
+        {
+            int screenX;
+            int screenY;
+            IntPtr hBmp;
+            IntPtr hdcScreen = GetDC(GetDesktopWindow());
+            IntPtr hdcCompatible = CreateCompatibleDC(hdcScreen);
+
+            screenX = GetSystemMetrics(0);
+            screenY = GetSystemMetrics(1);
+            hBmp = CreateCompatibleBitmap(hdcScreen, screenX, screenY);
+
+            if (hBmp != IntPtr.Zero)
+            {
+                IntPtr hOldBmp = (IntPtr)SelectObject(hdcCompatible, hBmp);
+                BitBlt(hdcCompatible, 0, 0, screenX, screenY, hdcScreen, 0, 0, 13369376);
+
+                SelectObject(hdcCompatible, hOldBmp);
+                DeleteDC(hdcCompatible);
+                ReleaseDC(GetDesktopWindow(), hdcScreen);
+
+                Bitmap bmp = System.Drawing.Image.FromHbitmap(hBmp);
+
+                DeleteObject(hBmp);
+                GC.Collect();
+
+                return bmp;
+            }
+            return null;
+        }
+    }
+    #endregion
 }
