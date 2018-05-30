@@ -6,11 +6,52 @@
              xmlns:local="clr-namespace:YourSecretary.Resource.Component"
              xmlns:vm="clr-namespace:YourSecretary.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="50"
+             d:DesignHeight="620" d:DesignWidth="388"
              Height="{Binding PanelHeight, Mode=OneWay}"
              Width="{Binding PanelWidth, Mode=OneWay}"
-             Background="DimGray">
+             >
     <Grid>
-          
+        <StackPanel x:Name="ContentPanel" Height="600" Background="Black" Opacity="0.8" Margin="0,0,0,-1220">
+            <TextBlock Height="20">
+                <Run Foreground="White" FontSize="15">aaaaaaa</Run>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="TabSelectPanel" Height="20" Orientation="Horizontal" Margin="0,0,0,-600">
+            <Button Height="20" Width="150">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!--<DoubleAnimation 
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Height)"
+                                AccelerationRatio="0.2"
+                                From="600" To="0" Duration="0:0:0.8" />
+                                <DoubleAnimation 
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Height)"
+                                DecelerationRatio="0.8"
+                                From="600" To="0" Duration="0:0:0.8" />-->
+                                <ThicknessAnimation
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,-1220" To="0" Duration="0:0:0.6" />
+                                <!--<DoubleAnimation 
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Opacity)"
+                                AccelerationRatio="0.7"
+                                From="0" To="0.75" Duration="0:0:1" />
+                                <DoubleAnimation 
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Opacity)"
+                                DecelerationRatio="0.3"
+                                From="0" To="0.75" Duration="0:0:1" />-->
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

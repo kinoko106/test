@@ -26,7 +26,7 @@
         <models:MainWindowViewModel/>
     </Window.DataContext>
 
-    <StackPanel x:Name="ParentPanel" Orientation="Vertical"
+    <Grid x:Name="ParentPanel"
                     Height="{Binding PanelHeight,Mode=OneWay}" 
                     Width="{Binding PanelWidth,Mode=OneWay}">
 
@@ -81,5 +81,5 @@
         <component:SettingTab DataContext="{Binding SettingTab}">
 
         </component:SettingTab>
-    </StackPanel>
+    </Grid>
 </Window>

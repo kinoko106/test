@@ -21,7 +21,7 @@ namespace YourSecretary.ViewModel
 			mainObject= new MainObjectModel();
 
 			WindowWidth = mainObject.Width;
-			WindowHeight = mainObject.Height + 50;
+			WindowHeight = mainObject.Height;
 			ImagePath = mainObject.ImagePath;
 			Mask = 1;
 		}
@@ -33,7 +33,7 @@ namespace YourSecretary.ViewModel
 			mainObject = new MainObjectModel();
 
 			WindowWidth = mainObject.Width;
-			WindowHeight = mainObject.Height + 50;
+			WindowHeight = mainObject.Height;
 			ImagePath = mainObject.ImagePath;
 			Mask = 1;
 		}

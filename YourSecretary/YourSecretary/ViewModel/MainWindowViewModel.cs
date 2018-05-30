@@ -15,9 +15,9 @@ namespace YourSecretary.ViewModel
 		public MainWindowViewModel()
 		{
 			Secretary = new SecretaryObjectViewModel(this);
-			WindowHeight = Secretary.WindowHeight + 50;
+			WindowHeight = Secretary.WindowHeight + 20;
 			WindowWidth = Secretary.WindowWidth;
-			PanelHeight = Secretary.WindowHeight + 50;
+			PanelHeight = Secretary.WindowHeight + 20;
 			PanelWidth = Secretary.WindowWidth;
 			ImageHeight = Secretary.WindowHeight;
 			ImageWidth = Secretary.WindowWidth;
@@ -26,7 +26,7 @@ namespace YourSecretary.ViewModel
 			SettingTabWidth = Secretary.WindowWidth;
 
 			SettingTab = new SettingTabViewModel();
-			SettingTab.PanelHeight = 10;
+			SettingTab.PanelHeight = Secretary.WindowHeight + 20; ;
 			SettingTab.PanelWidth = Secretary.WindowWidth;
 		}
 
