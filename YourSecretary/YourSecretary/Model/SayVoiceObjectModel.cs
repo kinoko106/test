@@ -10,8 +10,8 @@ namespace YourSecretary.Model
 {
 	class SayVoiceObjectModel
 	{
-		private const string voiceDirectry = @".\Resource\Sound\Voice\";
-		//private const string voiceDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\Voice\";
+		//private const string voiceDirectry = @".\Resource\Sound\Voice\";
+		private const string voiceDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\Voice\";
 		private List<string> clickVoices = new List<string>();
 		private SoundPlayer player = null;
 

@@ -1,4 +1,4 @@
-﻿<Window x:Class="YourSecretary.MainWindow"
+﻿<Window x:Class="YourSecretary.Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,7 @@
         xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
         xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+        xmlns:component="clr-namespace:YourSecretary.Resource.Component"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True" 
@@ -22,43 +23,63 @@
         InputMethod.IsInputMethodEnabled="False"
         >
     <Window.DataContext x:Uid="YourSecretary">
-        <models:MainObjectViewModel/>
+        <models:MainWindowViewModel/>
     </Window.DataContext>
 
-    <StackPanel x:Name="Pannel1" Orientation="Vertical" 
-                Height="{Binding WindowHeight,Mode=OneWay}" 
-                Width="{Binding WindowWidth,Mode=OneWay}"
-                >
-        <Interactivity:Interaction.Triggers>
-            <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
-                <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
-            </Interactivity:EventTrigger>
-            <Interactivity:EventTrigger EventName="MouseLeftButtonDown">
-                <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonDown}"/>
-            </Interactivity:EventTrigger>
-            <Interactivity:EventTrigger EventName="MouseRightButtonDown">
-                <Interactivity:InvokeCommandAction Command="{Binding MouseRightButtonDown}"/>
-            </Interactivity:EventTrigger>
-        </Interactivity:Interaction.Triggers>
+    <StackPanel x:Name="ParentPanel" Orientation="Vertical"
+                    Height="{Binding PanelHeight,Mode=OneWay}" 
+                    Width="{Binding PanelWidth,Mode=OneWay}">
 
-        <Image x:Name="mainobj" Source="{Binding ImagePath}" 
-               Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" 
-               Opacity="{Binding Mask,Mode=TwoWay}">
-        </Image>
-        <!--
-        <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 
-                Width="{Binding WindowWidth}" 
-               Height="{Binding WindowHeight}">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Source="{Binding ImagePath}" 
-                       Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-                       Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" >
-                    </Image>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        -->
+        <StackPanel x:Name="ImagePanel" Orientation="Vertical" 
+                    Height="{Binding ImageHeight,Mode=OneWay}" 
+                    Width="{Binding ImageWidth,Mode=OneWay}" HorizontalAlignment="Left"
+                    >
+            <!--<StackPanel.DataContext>
+                <models:SecretaryObjectViewModel/>
+            </StackPanel.DataContext>-->
+            <!--<Interactivity:Interaction.Triggers>
+                <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
+                    <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
+                </Interactivity:EventTrigger>
+                <Interactivity:EventTrigger EventName="MouseLeftButtonDown">
+                    <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonDown}"/>
+                </Interactivity:EventTrigger>
+                <Interactivity:EventTrigger EventName="MouseRightButtonDown">
+                    <Interactivity:InvokeCommandAction Command="{Binding MouseRightButtonDown}"/>
+                </Interactivity:EventTrigger>
+                -->
+            <!--<Interactivity:EventTrigger EventName="MouseEnter">
+                    <Interactivity:InvokeCommandAction Command="{Binding MouseEnter}"/>
+                </Interactivity:EventTrigger>-->
+            <!--<Interactivity:EventTrigger EventName="MouseLeave">
+                    <Interactivity:InvokeCommandAction Command="{Binding MouseEnter}"/>
+                </Interactivity:EventTrigger>-->
+            <!--
+            </Interactivity:Interaction.Triggers>-->
+
+            <Image x:Name="mainobj" Source="{Binding ImagePath}" 
+                   Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                   Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" 
+                   Opacity="{Binding Mask,Mode=TwoWay}">
+            </Image>
+            <!--
+            <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 
+                    Width="{Binding WindowWidth}" 
+                   Height="{Binding WindowHeight}">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Source="{Binding ImagePath}" 
+                           Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                           Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" >
+                        </Image>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            -->
+        </StackPanel>
+
+        <component:SettingTab DataContext="{Binding SettingTab}">
+
+        </component:SettingTab>
     </StackPanel>
 </Window>

@@ -3,21 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using YourSecretary.Model;
 using Livet.Commands;
-using System.Windows;
 using System.Drawing;
 
 namespace YourSecretary.ViewModel
 {
-	class MainObjectViewModel : Livet.ViewModel
+	class SecretaryObjectViewModel : Livet.ViewModel
 	{
 		private MainObjectModel mainObject;
+		private MainWindowViewModel _owner;
 
-		public MainObjectViewModel()
+		public SecretaryObjectViewModel()
 		{
 			mainObject= new MainObjectModel();
+
+			WindowWidth = mainObject.Width;
+			WindowHeight = mainObject.Height + 50;
+			ImagePath = mainObject.ImagePath;
+			Mask = 1;
+		}
+
+		public SecretaryObjectViewModel(MainWindowViewModel owner)
+		{
+			_owner = owner;
+
+			mainObject = new MainObjectModel();
 
 			WindowWidth = mainObject.Width;
 			WindowHeight = mainObject.Height + 50;
@@ -69,6 +82,22 @@ namespace YourSecretary.ViewModel
 					_MouseRightButtonDown = new ViewModelCommand(UpdateMask);
 				}
 				return _MouseRightButtonDown;
+			}
+		}
+		#endregion
+
+		#region MouseEnter
+		private ViewModelCommand _MouseEnter = null;
+
+		public ViewModelCommand MouseEnter
+		{
+			get
+			{
+				if (_MouseEnter == null)
+				{
+					_MouseEnter = new ViewModelCommand(UpdateMask);
+				}
+				return _MouseEnter;
 			}
 		}
 		#endregion
@@ -179,6 +208,11 @@ namespace YourSecretary.ViewModel
 			mainObject.ToggleSayVoiceState();
 		}
 
+		bool _MAskFlag = false;
+		public void ToggleMaskFlag()
+		{
+			_MAskFlag = _MAskFlag ? true : false;
+		}
 
 		private int startX;
 		private int startY;

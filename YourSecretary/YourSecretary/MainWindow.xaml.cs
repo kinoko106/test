@@ -19,12 +19,13 @@ namespace YourSecretary
 	/// <summary>
 	/// MainWindow.xaml の相互作用ロジック
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class Window : System.Windows.Window
 	{
-		public MainWindow()
+		public Window()
 		{
 			this.MouseLeftButtonDown += (sender, e) => { this.DragMove(); };
-			
+			//this.MouseLeftButtonUp += (sender, e) => { int a = 0; };
+
 			this.Loaded += (sender, e) =>
 			{	
 				//mainObject = new MainObjectModel();
