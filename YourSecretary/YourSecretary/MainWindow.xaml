@@ -79,7 +79,6 @@
         </StackPanel>
 
         <component:SettingTab DataContext="{Binding SettingTab}">
-
         </component:SettingTab>
     </Grid>
 </Window>

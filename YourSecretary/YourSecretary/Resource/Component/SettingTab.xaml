@@ -8,16 +8,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="620" d:DesignWidth="388"
              Height="{Binding PanelHeight, Mode=OneWay}"
-             Width="{Binding PanelWidth, Mode=OneWay}"
+             Width="{Binding PanelWidth, Mode=OneWay}" Margin="0,0,0,0"
              >
     <Grid>
-        <StackPanel x:Name="ContentPanel" Height="600" Background="Black" Opacity="0.8" Margin="0,0,0,-1220">
-            <TextBlock Height="20">
-                <Run Foreground="White" FontSize="15">aaaaaaa</Run>
-            </TextBlock>
+        <StackPanel x:Name="ContentPanel" Height="600" VerticalAlignment="Center" Margin="0,0,0,-1220" Style="{DynamicResource SettingTabStyle}">
+            <StackPanel Height="30" Style="{DynamicResource SettingTabStyle}">
+                <Border BorderThickness="2">
+                    <TextBlock Width="80" Height="25" TextAlignment="Center" Style="{DynamicResource TextBlockStyle}">
+                        <Run Style="{DynamicResource TextStyle}" FontSize="19">Settings</Run>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock Width="80" Style="{DynamicResource TextBlockStyle}">
+                    <Run Style="{DynamicResource TextStyle}">ImagePath:</Run>
+                </TextBlock>
+                <TextBox Width="290" Style="{DynamicResource TextBoxStyle}">
+
+                </TextBox>
+            </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="TabSelectPanel" Height="20" Orientation="Horizontal" Margin="0,0,0,-600">
-            <Button Height="20" Width="150">
+        <StackPanel x:Name="TabSelectPanel" Height="20" Orientation="Horizontal" Margin="0,0,0,-600" Style="{DynamicResource DefaultControlStyle}" Panel.ZIndex="1">
+            <Button Height="20" Width="150" Panel.ZIndex="1">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="ButtonBase.Click">
                         <BeginStoryboard>
@@ -36,7 +48,7 @@
                                 Storyboard.TargetName="ContentPanel"
                                 Storyboard.TargetProperty="(StackPanel.Margin)"
                                 DecelerationRatio="1"
-                                From="0,0,0,-1220" To="0" Duration="0:0:0.6" />
+                                From="0,0,0,-1220" To="0,0,0,20" Duration="0:0:0.4" />
                                 <!--<DoubleAnimation 
                                 Storyboard.TargetName="ContentPanel"
                                 Storyboard.TargetProperty="(StackPanel.Opacity)"
@@ -52,6 +64,32 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
+            <ToggleButton Width="238" Content="button" Style="{DynamicResource ToggleButtonStyle}">
+                <ToggleButton.Triggers>
+                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,-1220" To="0,0,0,20" Duration="0:0:0.4" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,20" To="0,0,0,-1220" Duration="0:0:0.4" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ToggleButton.Triggers>
+            </ToggleButton>
         </StackPanel>
     </Grid>
 </UserControl>
