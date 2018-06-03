@@ -1,0 +1,60 @@
+    <Window.Resources>
+        <Style x:Key="GadgetStyle" TargetType="{x:Type local:Window}">
+            <Setter Property="shell:WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <shell:WindowChrome GlassFrameThickness="-1"
+                                            ResizeBorderThickness="6"
+                                            CaptionHeight="25" />
+                </Setter.Value>
+            </Setter>
+	<Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:Window}">
+                        <Grid>
+                            <!-- ウィンドウアイコンの設定 -->
+                            <Button VerticalAlignment="Top" HorizontalAlignment="Left" Padding="1"
+                                    Margin="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                    Path=(shell:WindowChrome.WindowChrome).ResizeBorderThickness}"
+                                    shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                                    Command="{x:Static shell:SystemCommands.ShowSystemMenuCommand}"
+                                    CommandParameter="{Binding ElementName=ChromeWindow}">
+                                <!-- アイコンの背景を透過するためにスタイルを再設定 -->
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                                <!-- アイコンイメージの設定 -->
+                                <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Icon}"
+                                       Width="16" Height="16"
+                                       shell:WindowChrome.IsHitTestVisibleInChrome="True" />
+                            </Button>
+                            <!-- ウィンドウタイトルを見やすくするために背景に白いぼかしを設定 -->
+                            <TextBlock VerticalAlignment="Top" TextAlignment="Left"
+                                       Padding="27,6,0,0" Foreground="White"
+                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}">
+                                <TextBlock.Effect>
+                                    <BlurEffect KernelType="Box" Radius="8" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <!-- ウィンドウタイトルを設定 -->
+                            <TextBlock VerticalAlignment="Top" TextAlignment="Left"
+                                       Padding="27,6,0,0" Foreground="Black"
+                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}" />
+                            <!-- クライアントエリアの設定 -->
+                            <Border Margin="6,26,6,6" BorderBrush="Gray" BorderThickness="1,1,1,1">
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>

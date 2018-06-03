@@ -47,6 +47,24 @@ namespace YourSecretary.Model
 			_mask = 1;
 		}
 
+		public ImageObjectModel(string path,int side)
+		{
+			current = new Uri(System.IO.Directory.GetCurrentDirectory());
+
+			Image = new BitmapImage();
+
+			Image.BeginInit();
+			Image.UriSource = new Uri(path);
+			Image.DecodePixelHeight = side;
+			Image?.EndInit();
+
+			_width = (int)Image?.PixelWidth;
+			_height = (int)Image?.PixelHeight;
+			_filepath = Image?.UriSource.ToString();
+
+			_mask = 1;
+		}
+
 		public int Width
 		{
 			get { return _width; }

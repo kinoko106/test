@@ -20,13 +20,13 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
     <!--#endregion-->
-    <!--#region TextBlock-->
+    <!--#region Text-->
     <Style TargetType="{x:Type Run}" x:Key="TextStyle">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
     <!--#endregion-->
-    <!--#region TextBlock-->
+    <!--#region TextBox-->
     <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
         <Setter Property="Height" Value="20"/>
         <Setter Property="Background" Value="Black"/>
@@ -35,10 +35,19 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
     </Style>
     <!--#endregion-->
-    <!--#region -->
+    <!--#region Button -->
+    <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Margin" Value="2,5,2,5"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+    <!--#endregion-->
+    <!--#region ToggleButton -->
     <Style TargetType="{x:Type ToggleButton}" x:Key="ToggleButtonStyle">
         <Setter Property="Height" Value="20"/>
         <Setter Property="Background" Value="White"/>

@@ -30,6 +30,7 @@ namespace YourSecretary.ViewModel
 			SettingTab.PanelWidth = Secretary.WindowWidth;
 		}
 
+		#region SettingTab
 		public SettingTabViewModel _SettingTab;
 
 		public SettingTabViewModel SettingTab
@@ -44,6 +45,7 @@ namespace YourSecretary.ViewModel
 				RaisePropertyChanged(nameof(SettingTab));
 			}
 		}
+		#endregion
 
 		#region WindowWidth
 		private int _WindowWidth;

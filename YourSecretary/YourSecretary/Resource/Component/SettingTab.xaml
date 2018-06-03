@@ -11,85 +11,60 @@
              Width="{Binding PanelWidth, Mode=OneWay}" Margin="0,0,0,0"
              >
     <Grid>
-        <StackPanel x:Name="ContentPanel" Height="600" VerticalAlignment="Center" Margin="0,0,0,-1220" Style="{DynamicResource SettingTabStyle}">
+        <StackPanel x:Name="ContentPanel" Height="620" VerticalAlignment="Center" Margin="0,0,0,-1240" Style="{DynamicResource SettingTabStyle}">
             <StackPanel Height="30" Style="{DynamicResource SettingTabStyle}">
-                <Border BorderThickness="2">
-                    <TextBlock Width="80" Height="25" TextAlignment="Center" Style="{DynamicResource TextBlockStyle}">
-                        <Run Style="{DynamicResource TextStyle}" FontSize="19">Settings</Run>
-                    </TextBlock>
-                </Border>
+                <TextBlock Width="80" Height="25" TextAlignment="Center" Style="{DynamicResource TextBlockStyle}">
+                   <Run Style="{DynamicResource TextStyle}" FontSize="19">Settings</Run>
+                </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,0">
-                <TextBlock Width="80" Style="{DynamicResource TextBlockStyle}">
+                <TextBlock Width="75" Style="{DynamicResource TextBlockStyle}" Margin="10,5,2,5">
                     <Run Style="{DynamicResource TextStyle}">ImagePath:</Run>
                 </TextBlock>
-                <TextBox Width="290" Style="{DynamicResource TextBoxStyle}">
+                <TextBox Width="260" Style="{DynamicResource TextBoxStyle}" Text="{Binding MainImagePath,Mode=TwoWay}">
 
                 </TextBox>
+                <Button Style="{DynamicResource ButtonStyle}" Width="30" Command="{Binding OpenDialog}">
+                    <Image Source="{Binding FolderImagePath}"/>
+                </Button>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="TabSelectPanel" Height="20" Orientation="Horizontal" Margin="0,0,0,-600" Style="{DynamicResource DefaultControlStyle}" Panel.ZIndex="1">
-            <Button Height="20" Width="150" Panel.ZIndex="1">
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="ButtonBase.Click">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <!--<DoubleAnimation 
-                                Storyboard.TargetName="ContentPanel"
-                                Storyboard.TargetProperty="(StackPanel.Height)"
-                                AccelerationRatio="0.2"
-                                From="600" To="0" Duration="0:0:0.8" />
-                                <DoubleAnimation 
-                                Storyboard.TargetName="ContentPanel"
-                                Storyboard.TargetProperty="(StackPanel.Height)"
-                                DecelerationRatio="0.8"
-                                From="600" To="0" Duration="0:0:0.8" />-->
-                                <ThicknessAnimation
+        <ToggleButton Width="28"  Margin="-360,0,0,-600" Opacity="1" Style="{DynamicResource ToggleButtonStyle}" Background="{Binding ImagePath}">
+            <Image Source="{Binding GearImagePath}" />
+            <ToggleButton.Triggers>
+                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation
                                 Storyboard.TargetName="ContentPanel"
                                 Storyboard.TargetProperty="(StackPanel.Margin)"
                                 DecelerationRatio="1"
-                                From="0,0,0,-1220" To="0,0,0,20" Duration="0:0:0.4" />
-                                <!--<DoubleAnimation 
+                                From="0,0,0,-120" To="0,0,0,0" Duration="0:0:0.2" />
+                            <DoubleAnimation
                                 Storyboard.TargetName="ContentPanel"
                                 Storyboard.TargetProperty="(StackPanel.Opacity)"
-                                AccelerationRatio="0.7"
-                                From="0" To="0.75" Duration="0:0:1" />
-                                <DoubleAnimation 
+                                DecelerationRatio="1"
+                                From="0" To="0.8" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation
+                                Storyboard.TargetName="ContentPanel"
+                                Storyboard.TargetProperty="(StackPanel.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,0" To="0,0,0,-120" Duration="0:0:0.2" />
+                            <DoubleAnimation
                                 Storyboard.TargetName="ContentPanel"
                                 Storyboard.TargetProperty="(StackPanel.Opacity)"
-                                DecelerationRatio="0.3"
-                                From="0" To="0.75" Duration="0:0:1" />-->
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
-            <ToggleButton Width="238" Content="button" Style="{DynamicResource ToggleButtonStyle}">
-                <ToggleButton.Triggers>
-                    <EventTrigger RoutedEvent="ToggleButton.Checked">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ThicknessAnimation
-                                Storyboard.TargetName="ContentPanel"
-                                Storyboard.TargetProperty="(StackPanel.Margin)"
                                 DecelerationRatio="1"
-                                From="0,0,0,-1220" To="0,0,0,20" Duration="0:0:0.4" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ThicknessAnimation
-                                Storyboard.TargetName="ContentPanel"
-                                Storyboard.TargetProperty="(StackPanel.Margin)"
-                                DecelerationRatio="1"
-                                From="0,0,0,20" To="0,0,0,-1220" Duration="0:0:0.4" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </ToggleButton.Triggers>
-            </ToggleButton>
-        </StackPanel>
+                                From="0.8" To="0" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ToggleButton.Triggers>
+        </ToggleButton>
     </Grid>
 </UserControl>
