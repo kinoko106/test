@@ -8,6 +8,7 @@ using System.Windows.Input;
 using YourSecretary.Model;
 using Livet.Commands;
 using System.Drawing;
+using System.Windows.Media.Effects;
 
 namespace YourSecretary.ViewModel
 {
@@ -38,7 +39,29 @@ namespace YourSecretary.ViewModel
 			WindowHeight = mainObject.Height;
 			ImagePath = mainObject.ImagePath;
 			Mask = 1;
+
+			BlurEffect blur = new BlurEffect();
+			blur.Radius = 20;
+			blur.KernelType = KernelType.Gaussian;
+			//BlurEffect = blur;
 		}
+
+		#region BlurEffect
+		private Effect _BlurEffect;
+
+		public Effect BlurEffect
+		{
+			get
+			{ return _BlurEffect; }
+			set
+			{
+				if (_BlurEffect == value)
+					return;
+				_BlurEffect = value;
+				RaisePropertyChanged(nameof(BlurEffect));
+			}
+		}
+		#endregion
 
 		#region MouseLeftButtonUpCommand
 		private ViewModelCommand _MouseLeftButtonUp = null;
