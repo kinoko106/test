@@ -10,8 +10,9 @@
              Height="{Binding PanelHeight, Mode=OneWay}"
              Width="{Binding PanelWidth, Mode=OneWay}" Margin="0,0,0,0"
              >
-    <Grid>
-        <StackPanel x:Name="ContentPanel" Height="620" VerticalAlignment="Center" Margin="0,0,0,-1240" Style="{DynamicResource SettingTabStyle}">
+    <Grid x:Name="ImageSettingTabGrid" >
+        <!--<Grid x:Name="BlurGrid" Height="620" Effect="{Binding BlurEffect}" Background="Black" Margin="0,0,0,-120" Opacity="0"></Grid>-->
+        <StackPanel x:Name="ContentPanel" Height="620" VerticalAlignment="Center" Margin="0,0,0,-120" Opacity="0.8" Style="{DynamicResource SettingTabStyle}">
             <StackPanel Height="30" Style="{DynamicResource SettingTabStyle}">
                 <TextBlock Width="80" Height="25" TextAlignment="Center" Style="{DynamicResource TextBlockStyle}">
                    <Run Style="{DynamicResource TextStyle}" FontSize="19">Settings</Run>
@@ -22,11 +23,30 @@
                     <Run Style="{DynamicResource TextStyle}">ImagePath:</Run>
                 </TextBlock>
                 <TextBox Width="260" Style="{DynamicResource TextBoxStyle}" Text="{Binding MainImagePath,Mode=TwoWay}">
-
                 </TextBox>
                 <Button Style="{DynamicResource ButtonStyle}" Width="30" Command="{Binding OpenDialog}">
-                    <Image Source="{Binding FolderImagePath}"/>
+                    <Image Opacity="1" Source="{Binding FolderImagePath}"/>
                 </Button>
+            </StackPanel>
+            <StackPanel Height="30" Style="{DynamicResource SettingTabStyle}">
+                <TextBlock Style="{DynamicResource TextBlockStyle}">
+                    <Run Style="{DynamicResource TextStyle}">Preview</Run>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel x:Name="PreviewPanel" Style="{DynamicResource SettingTabContentStyle}"
+                        Height="405">
+                <Border BorderThickness="2" BorderBrush="#66E200FF" Height="405">
+                    <Image x:Name="PreviewImage" Source="{Binding MainImagePath}"
+                            Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                            Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
+                            >
+                    </Image>
+                </Border>
+            </StackPanel>
+            <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="50" Height="20" Content="Apply" 
+                        Style="{DynamicResource ButtonStyle}" Foreground="White"
+                        Command="{Binding ApplyImage}"></Button>
             </StackPanel>
         </StackPanel>
         <ToggleButton Width="28"  Margin="-360,0,0,-600" Opacity="1" Style="{DynamicResource ToggleButtonStyle}" Background="{Binding ImagePath}">
@@ -45,6 +65,16 @@
                                 Storyboard.TargetProperty="(StackPanel.Opacity)"
                                 DecelerationRatio="1"
                                 From="0" To="0.8" Duration="0:0:0.2" />
+                            <!--<ThicknessAnimation
+                                Storyboard.TargetName="BlurGrid"
+                                Storyboard.TargetProperty="(Grid.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,-120" To="0,0,0,0" Duration="0:0:0.2" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="BlurGrid"
+                                Storyboard.TargetProperty="(Grid.Opacity)"
+                                DecelerationRatio="1"
+                                From="0" To="0.8" Duration="0:0:0.2" />-->
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -61,6 +91,16 @@
                                 Storyboard.TargetProperty="(StackPanel.Opacity)"
                                 DecelerationRatio="1"
                                 From="0.8" To="0" Duration="0:0:0.2" />
+                            <!--<ThicknessAnimation
+                                Storyboard.TargetName="BlurGrid"
+                                Storyboard.TargetProperty="(Grid.Margin)"
+                                DecelerationRatio="1"
+                                From="0,0,0,0" To="0,0,0,-120" Duration="0:0:0.2" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="BlurGrid"
+                                Storyboard.TargetProperty="(Grid.Opacity)"
+                                DecelerationRatio="1"
+                                From="0.8" To="0" Duration="0:0:0.2" />-->
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>

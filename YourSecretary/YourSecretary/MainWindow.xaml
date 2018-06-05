@@ -27,58 +27,9 @@
         <models:MainWindowViewModel/>
     </Window.DataContext>
 
-    <Grid x:Name="ParentPanel" Opacity="1"
-                    Height="{Binding PanelHeight,Mode=OneWay}" 
-                    Width="{Binding PanelWidth,Mode=OneWay}">
-
-        <StackPanel x:Name="ImagePanel" Orientation="Vertical" 
-                    Height="{Binding ImageHeight,Mode=OneWay}" 
-                    Width="{Binding ImageWidth,Mode=OneWay}" HorizontalAlignment="Left"
-                    >
-            <!--<StackPanel.DataContext>
-                <models:SecretaryObjectViewModel/>
-            </StackPanel.DataContext>-->
-            <!--<Interactivity:Interaction.Triggers>
-                <Interactivity:EventTrigger EventName="MouseLeftButtonUp">
-                    <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
-                </Interactivity:EventTrigger>
-                <Interactivity:EventTrigger EventName="MouseLeftButtonDown">
-                    <Interactivity:InvokeCommandAction Command="{Binding MouseLeftButtonDown}"/>
-                </Interactivity:EventTrigger>
-                <Interactivity:EventTrigger EventName="MouseRightButtonDown">
-                    <Interactivity:InvokeCommandAction Command="{Binding MouseRightButtonDown}"/>
-                </Interactivity:EventTrigger>
-                -->
-            <!--<Interactivity:EventTrigger EventName="MouseEnter">
-                    <Interactivity:InvokeCommandAction Command="{Binding MouseEnter}"/>
-                </Interactivity:EventTrigger>-->
-            <!--<Interactivity:EventTrigger EventName="MouseLeave">
-                    <Interactivity:InvokeCommandAction Command="{Binding MouseEnter}"/>
-                </Interactivity:EventTrigger>-->
-            <!--
-            </Interactivity:Interaction.Triggers>-->
-
-            <Image x:Name="mainobj" Source="{Binding ImagePath}" 
-                   Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-                   Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" 
-                   Opacity="{Binding Mask,Mode=TwoWay}">
-            </Image>
-            <!--
-            <Button x:Name="mainObject" Command="{Binding Path=SayClickVoice}"  Background="Transparent" 
-                    Width="{Binding WindowWidth}" 
-                   Height="{Binding WindowHeight}">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="{Binding ImagePath}" 
-                           Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-                           Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}" >
-                        </Image>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            -->
-        </StackPanel>
-
+    <Grid x:Name="ParentPanel">
+        <component:SecretaryObject DataContext="{Binding Secretary}">
+        </component:SecretaryObject>
         <component:SettingTab DataContext="{Binding SettingTab}">
         </component:SettingTab>
     </Grid>

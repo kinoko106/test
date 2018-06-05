@@ -88,5 +88,26 @@ namespace YourSecretary.Model
 			get { return _mask; }
 			set { _mask = value; }
 		}
+
+		public void UpdateImage(string path, int side)
+		{
+			Image = new BitmapImage();
+
+			Image.BeginInit();
+			Image.UriSource = new Uri(path);
+			Image.DecodePixelHeight = side;
+			Image?.EndInit();
+
+			_width = (int)Image?.PixelWidth;
+			_height = (int)Image?.PixelHeight;
+			_filepath = Image?.UriSource.ToString();
+
+			_mask = 1;
+		}
+
+		public void UpdateImage(string path)
+		{
+			_filepath = path;
+		}
 	}
 }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using YourSecretary.Model;
 using Microsoft.Win32;
 using Livet.Commands;
+using System.Windows.Media.Effects;
 
 namespace YourSecretary.ViewModel
 {
 	class SettingTabViewModel : Livet.ViewModel
 	{
+		private MainWindowViewModel Observer = null;
 		private ImageObjectModel m_ImageObject;
-		ImageObjectModel m_FolderObject;
+		private ImageObjectModel m_FolderObject;
+		private ImageObjectModel m_PreviewObject;
 
 		public SettingTabViewModel()
 		{
@@ -23,8 +26,42 @@ namespace YourSecretary.ViewModel
 
 			GearImagePath = m_ImageObject.FilePath;
 			FolderImagePath = m_FolderObject.FilePath;
-			//PanelHeight = 30;
 		}
+
+		public SettingTabViewModel(object owner)
+		{
+			string gearPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\gear.png";
+			string folderPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\folder.png";
+			m_ImageObject = new ImageObjectModel(gearPath, 20);
+			m_FolderObject = new ImageObjectModel(folderPath, 20);
+
+			GearImagePath = m_ImageObject.FilePath;
+			FolderImagePath = m_FolderObject.FilePath;
+
+			Observer = (MainWindowViewModel)owner;
+
+			//BlurEffect blur = new BlurEffect();
+			//blur.Radius = 20;
+			//blur.KernelType = KernelType.Gaussian;
+			//BlurEffect = blur;
+		}
+
+		#region BlurEffect
+		private Effect _BlurEffect;
+
+		public Effect BlurEffect
+		{
+			get
+			{ return _BlurEffect; }
+			set
+			{
+				if (_BlurEffect == value)
+					return;
+				_BlurEffect = value;
+				RaisePropertyChanged(nameof(BlurEffect));
+			}
+		}
+		#endregion
 
 		#region FolderImagePath
 		private string _FolderImagePath;
@@ -56,6 +93,23 @@ namespace YourSecretary.ViewModel
 					return;
 				_GearImagePath = value;
 				RaisePropertyChanged(nameof(GearImagePath));
+			}
+		}
+		#endregion
+
+		#region MainImagePath
+		private string _MainImagePath;
+
+		public string MainImagePath
+		{
+			get
+			{ return _MainImagePath; }
+			set
+			{
+				if (_MainImagePath == value)
+					return;
+				_MainImagePath = value;
+				RaisePropertyChanged(nameof(MainImagePath));
 			}
 		}
 		#endregion
@@ -110,23 +164,59 @@ namespace YourSecretary.ViewModel
 		}
 		#endregion
 
+		#region ApplyImage
+		private ViewModelCommand _ApplyImage = null;
 
-		void SelectImage()
+		public ViewModelCommand ApplyImage
+		{
+			get
+			{
+				if (_ApplyImage == null)
+				{
+					_ApplyImage = new ViewModelCommand(UpdateImage);
+				}
+				return _ApplyImage;
+			}
+		}
+		#endregion
+
+		void UpdateImage()
+		{
+			Observer?.SetImage(MainImagePath);
+			MainImagePath = "";
+		}
+
+		//リサイズしたい
+		void UpdatePreview()
+		{
+			m_PreviewObject = new ImageObjectModel(MainImagePath, 400);
+		}
+
+		private void SelectImage()
 		{
 			string filePath = null;
 
-			Action a = async() =>
+			Action a = async () =>
 			{
-				await Task.Run(() => 
+				await Task.Run(() =>
 					{
 						var dialog = new OpenFileDialog();
 						dialog.Title = "ファイルを開く";
 						dialog.Filter = "Image Files(*.jpg,*.jepg,*.png,*.bmp,*.tiff)|*.jpg;*.jepg;*.png;*.bmp;*.tiff|All files(*.*)|*.*";
 						dialog.Multiselect = false;
 
+						string defaultPath = System.IO.Directory.GetCurrentDirectory();
+						defaultPath += @"\Resource\Image\";
+						dialog.InitialDirectory = defaultPath;
+
 						dialog.ShowDialog();
-						
+
 						filePath = dialog.FileName;
+						if (!string.IsNullOrEmpty(filePath))
+						{
+							//Observer?.SetImage(filePath);
+							MainImagePath = filePath;
+						}
 					}
 				);
 			};

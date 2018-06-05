@@ -10,6 +10,9 @@
         <Setter Property="Background" Value="Black"/>
         <Setter Property="Opacity" Value="0.8"/>
     </Style>
+    <Style TargetType="{x:Type StackPanel}" x:Key="SettingTabContentStyle">
+        <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
     <!--#endregion-->
     <!--#region TextBlock-->
     <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockStyle">

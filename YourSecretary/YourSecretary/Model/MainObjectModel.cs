@@ -23,6 +23,13 @@ namespace YourSecretary.Model
 			voice = new SayVoiceObjectModel();
 		}
 
+		public MainObjectModel(string path)
+		{
+			timerSignal = new TimerSignalObjectModel();
+			mainImage = new ImageObjectModel(path,600);
+			voice = new SayVoiceObjectModel();
+		}
+
 		public int Width
 		{
 			get { return mainImage.Width; }
@@ -58,6 +65,11 @@ namespace YourSecretary.Model
 		public void SayClickVoice()
 		{
 			voice.PlayClickVoice();
+		}
+
+		public void UpdateImage(string path)
+		{
+			mainImage.UpdateImage(path);
 		}
 	}
 }

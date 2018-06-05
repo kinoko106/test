@@ -16,9 +16,11 @@ namespace YourSecretary.ViewModel
 		private MainObjectModel mainObject;
 		private MainWindowViewModel _owner;
 
+		const string path = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
+
 		public SecretaryObjectViewModel()
 		{
-			mainObject= new MainObjectModel();
+			mainObject= new MainObjectModel(path);
 
 			WindowWidth = mainObject.Width;
 			WindowHeight = mainObject.Height;
@@ -30,7 +32,7 @@ namespace YourSecretary.ViewModel
 		{
 			_owner = owner;
 
-			mainObject = new MainObjectModel();
+			mainObject = new MainObjectModel(path);
 
 			WindowWidth = mainObject.Width;
 			WindowHeight = mainObject.Height;
@@ -230,6 +232,12 @@ namespace YourSecretary.ViewModel
 
 			if (startY == endY && startX == endX)
 				mainObject.SayClickVoice();
+		}
+
+		public void UpdateImage(string path)
+		{
+			mainObject.UpdateImage(path);
+			ImagePath = path;
 		}
 	}
 }
