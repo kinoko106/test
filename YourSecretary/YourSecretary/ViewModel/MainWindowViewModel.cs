@@ -142,6 +142,11 @@ namespace YourSecretary.ViewModel
 		}
 		#endregion
 
+		public void SetBlurEffect()
+		{
+			Secretary.SetBlurEffect(); 
+		}
+
 		public void SetImage(string path)
 		{
 			Secretary.UpdateImage(path);

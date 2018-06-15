@@ -40,9 +40,9 @@ namespace YourSecretary.ViewModel
 			ImagePath = mainObject.ImagePath;
 			Mask = 1;
 
-			BlurEffect blur = new BlurEffect();
-			blur.Radius = 20;
-			blur.KernelType = KernelType.Gaussian;
+			//BlurEffect blur = new BlurEffect();
+			//blur.Radius = 20;
+			//blur.KernelType = KernelType.Gaussian;
 			//BlurEffect = blur;
 		}
 
@@ -226,6 +226,23 @@ namespace YourSecretary.ViewModel
 			}
 		}
 		#endregion
+
+		public void SetBlurEffect()
+		{
+			if (BlurEffect != null)
+			{
+				BlurEffect = null;
+			}
+			else
+			{
+				BlurEffect blur = new BlurEffect
+				{
+					Radius = 20,
+					KernelType = KernelType.Gaussian
+				};
+				BlurEffect = blur;
+			}
+		}
 
 		public void UpdateMask()
 		{

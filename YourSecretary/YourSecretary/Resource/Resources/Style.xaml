@@ -9,15 +9,17 @@
     <Style TargetType="{x:Type StackPanel}" x:Key="SettingTabStyle">
         <Setter Property="Background" Value="Black"/>
         <Setter Property="Opacity" Value="0.8"/>
-    </Style>
-    <Style TargetType="{x:Type StackPanel}" x:Key="SettingTabContentStyle">
         <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
+    <Style TargetType="{x:Type StackPanel}" x:Key="SettingTabStackPanelStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Opacity" Value="0.8"/>
     </Style>
     <!--#endregion-->
     <!--#region TextBlock-->
     <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockStyle">
         <Setter Property="Height" Value="22"/>
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Setter Property="Margin" Value="2,5,2,5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -32,13 +34,14 @@
     <!--#region TextBox-->
     <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
         <Setter Property="Height" Value="20"/>
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Setter Property="Margin" Value="2,5,2,5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="CaretBrush" Value="White"/>
     </Style>
     <!--#endregion-->
     <!--#region Button -->
@@ -46,7 +49,7 @@
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="20" />
         <Setter Property="Margin" Value="2,5,2,5"/>
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Opacity" Value="0.8"/>
     </Style>
     <!--#endregion-->

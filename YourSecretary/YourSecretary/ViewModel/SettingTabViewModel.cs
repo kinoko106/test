@@ -180,6 +180,27 @@ namespace YourSecretary.ViewModel
 		}
 		#endregion
 
+		#region SettingPanelOpen
+		private ViewModelCommand _SettingPanelOpen = null;
+
+		public ViewModelCommand SettingPanelOpen
+		{
+			get
+			{
+				if (_SettingPanelOpen == null)
+				{
+					_SettingPanelOpen = new ViewModelCommand(ApplyBlurEffect);
+				}
+				return _SettingPanelOpen;
+			}
+		}
+		#endregion
+
+		void ApplyBlurEffect()
+		{
+			Observer?.SetBlurEffect();
+		}
+
 		void UpdateImage()
 		{
 			Observer?.SetImage(MainImagePath);
