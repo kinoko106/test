@@ -17,7 +17,8 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 
 using YourSecretary.Model;
-using Microsoft.Windows.Shell;
+using YourSecretary.Resource.Component;
+//using Microsoft.Windows.Shell;
 
 namespace YourSecretary
 {
@@ -49,8 +50,8 @@ namespace YourSecretary
 		private void MainWindow_Loaded(object sender, RoutedEventArgs e)
 		{
 			// グラス効果が利用できるかを確認してスタイルを適用する
-			this.Style = SystemParameters2.Current.IsGlassEnabled
-				? (Style)Resources["GadgetStyle"] : null;
+			//this.Style = SystemParameters2.Current.IsGlassEnabled
+			//	? (Style)Resources["GadgetStyle"] : null;
 		}
 		//[StructLayout(LayoutKind.Sequential)]
 		//public class MARGINS

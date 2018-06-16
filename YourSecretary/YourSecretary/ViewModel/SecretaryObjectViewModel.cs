@@ -17,7 +17,9 @@ namespace YourSecretary.ViewModel
 		private MainObjectModel mainObject;
 		private MainWindowViewModel _owner;
 
-		const string path = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
+		//const string path = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
+		const string path = @"C:\Users\daichiti\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\santa_syokaku_600.png";
+		const string fileName = "santa_syokaku_600.png";
 
 		public SecretaryObjectViewModel()
 		{

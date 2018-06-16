@@ -8,6 +8,11 @@ using System.Windows.Media.Imaging;
 
 namespace YourSecretary.Model
 {
+	public class ImageModel
+	{
+		public const string ImageDirectoryPath = @"\Resource\image\";
+	}
+
 	class ImageObjectModel 
 	{
 		//const string ImagePath = @".\Resource\Image\santa_syokaku_600.png";
@@ -49,8 +54,26 @@ namespace YourSecretary.Model
 
 		public ImageObjectModel(string path,int side)
 		{
-			current = new Uri(System.IO.Directory.GetCurrentDirectory());
+			string imagePath = System.IO.Directory.GetCurrentDirectory();
+			imagePath += ImageModel.ImageDirectoryPath;
+			imagePath += path;
 
+			Image = new BitmapImage();
+
+			Image.BeginInit();
+			Image.UriSource = new Uri(imagePath);
+			Image.DecodePixelHeight = side;
+			Image?.EndInit();
+
+			_width = (int)Image?.PixelWidth;
+			_height = (int)Image?.PixelHeight;
+			_filepath = Image?.UriSource.ToString();
+
+			_mask = 1;
+		}
+
+		public ImageObjectModel(string path, int side, bool isFullPath)
+		{
 			Image = new BitmapImage();
 
 			Image.BeginInit();

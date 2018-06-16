@@ -21,7 +21,7 @@ namespace YourSecretary.Model
 		bool doPlayFlg;
 
 		//private const string timerDirectry = @".\Resource\Sound\TimerSignal\";
-		private const string timerDirectry = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\TimerSignal\";
+		private const string timerDirectry = @"C:\Users\daichiti\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Sound\TimerSignal\";
 
 		public TimerSignalObjectModel()
 		{

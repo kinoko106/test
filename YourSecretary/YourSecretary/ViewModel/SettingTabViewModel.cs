@@ -30,8 +30,10 @@ namespace YourSecretary.ViewModel
 
 		public SettingTabViewModel(object owner)
 		{
-			string gearPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\gear.png";
-			string folderPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\folder.png";
+			//string gearPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\gear.png";
+			//string folderPath = @"C:\Users\daichi\Source\Repos\test\YourSecretary\YourSecretary\bin\Debug\Resource\Image\folder.png";
+			string gearPath = "gear.png";
+			string folderPath = "folder.png";
 			m_ImageObject = new ImageObjectModel(gearPath, 20);
 			m_FolderObject = new ImageObjectModel(folderPath, 20);
 

@@ -9,7 +9,6 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
         xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         xmlns:component="clr-namespace:YourSecretary.Resource.Component"
-        xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True" 

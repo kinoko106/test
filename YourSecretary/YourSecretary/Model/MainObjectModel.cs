@@ -26,7 +26,7 @@ namespace YourSecretary.Model
 		public MainObjectModel(string path)
 		{
 			timerSignal = new TimerSignalObjectModel();
-			mainImage = new ImageObjectModel(path,600);
+			mainImage = new ImageObjectModel(path,600,true);
 			voice = new SayVoiceObjectModel();
 		}
 
